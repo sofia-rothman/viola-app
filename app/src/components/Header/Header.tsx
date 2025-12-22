@@ -1,25 +1,26 @@
-import type { Task } from "../../types/Task"
 import "./Header.css"
 
 interface HeaderProps {
   points: number
-  tasks: Task[]
+  level: number
+  title: string
+  goal: React.RefObject<number>
 }
 
 const Header = (props: HeaderProps) => {
-  const { points, tasks } = props
+  const { points, level, title, goal } = props
 
   return (
     <div className="header">
-      <div>Bonnie Master</div>
-      <div>Level: 1</div>
+      <div>Bonnie {title}</div>
+      <div>Level: {level}</div>
       <div>
         <div key={points} className="score-display score-pop">
           {points} ⭐️
         </div>
         <progress
           className="progress-bar"
-          value={points && tasks ? points / tasks.length / 10 : 0}
+          value={points && points / goal.current}
         />
       </div>
     </div>

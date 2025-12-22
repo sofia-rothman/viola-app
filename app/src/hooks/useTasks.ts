@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import {
   getDataFromLocalStorage,
   saveDataToLocalStorage,
@@ -14,10 +14,28 @@ export const useTasks = () => {
     const data = getDataFromLocalStorage("XPpoints")
     return data ? Number.parseInt(data) : 0
   })
+  const goal = useRef(20)
+  const title = [
+    "Sysselsafari 🐾",
+    "Junior-fixare 🛠️",
+    "Hemmets Hjälte 🦸‍♀️",
+    "Ordningsexpert ✨",
+    "Guldstjärne-mästare 🌟",
+    "Legendarisk Fixar-drottning 👑",
+  ]
 
   const getPoints = () => {
     const completedTasks = tasks.filter((task) => task.completed)
     return completedTasks.length * 10
+  }
+
+  const getLevel = () => {
+    return totalXP / goal.current
+  }
+
+  const getTitle = () => {
+    const index = Math.floor(getLevel())
+    return index < 6 ? title[index] : title[title.length - 1]
   }
 
   const addTask = (title: string) => {
@@ -61,5 +79,8 @@ export const useTasks = () => {
     deleteTask,
     points: getPoints(),
     clearTasks,
+    level: getLevel(),
+    title: getTitle(),
+    goal,
   }
 }
