@@ -1,10 +1,8 @@
 import "./App.css"
-import TaskList from "./components/Tasklist/TaskList"
-import TaskInput from "./components/TaskInput/TaskInput"
 import { useTasks } from "./hooks/useTasks"
 import Header from "./components/Header/Header"
 import CelebrationModal from "./components/CelebrationModal/CelebrationModal"
-import EmptyState from "./components/EmptyState/EmptyState"
+import TodoPage from "./pages/todopage/TodoPage"
 
 function App() {
   const {
@@ -22,27 +20,13 @@ function App() {
   return (
     <>
       {points >= goal.current && <CelebrationModal clearTasks={clearTasks} />}
-      <Header
-        points={points}
+      <Header points={points} level={level} title={title} goal={goal} />
+      <TodoPage
+        addTask={addTask}
         tasks={tasks}
-        level={level}
-        title={title}
-        goal={goal}
+        toggleStatus={toggleStatus}
+        deleteTask={deleteTask}
       />
-      <div className="container">
-        <TaskInput saveInput={addTask} />
-        <div className="wrapper">
-          {tasks.length > 0 ? (
-            <TaskList
-              tasks={tasks}
-              toggleStatus={toggleStatus}
-              deleteTask={deleteTask}
-            />
-          ) : (
-            <EmptyState />
-          )}
-        </div>
-      </div>
     </>
   )
 }

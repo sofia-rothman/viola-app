@@ -3,9 +3,3 @@
   margin: 0 auto;
   text-align: center;
 }
-
-.container {
-  display: grid;
-  justify-content: center;
-  margin: 1rem;
-}
