@@ -1,0 +1,15 @@
+.input-container {
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  justify-content: space-between;
+  width: 90%;
+}
+
+.button-wrapper {
+padding-left: 1rem;
+}
+
+.add-button {
+  background-color: var( --color-primary-dark);
+}

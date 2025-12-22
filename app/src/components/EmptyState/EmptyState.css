@@ -1,0 +1,16 @@
+.empty-state-container {
+  display: flex; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 5rem;
+  text-align: center; 
+  color: var(--color-text-light);
+}
+
+.empty-state-container img {
+  width: 5rem;  /* Öka storleken lite för mer "wow"-känsla */
+  height: 5rem;
+  margin-top: 1.5rem; /* Skapa avstånd mellan texten och emojin */
+  filter: brightness(0) invert(1)
+}

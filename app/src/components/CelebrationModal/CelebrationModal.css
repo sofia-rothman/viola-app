@@ -1,0 +1,28 @@
+.modal-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 9999;
+}
+
+.modal {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  width: 70vw;
+  height: 50vh;
+  background-color: rgb(135, 179, 220);
+  position: absolute;
+  border-radius: 5%;
+  border: 3px solid var(--color-accent);
+  animation: pop 0.3s ease-out;
+}
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.4); color: var(--color-accent); }
+  100% { transform: scale(1); }
+}

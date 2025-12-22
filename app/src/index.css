@@ -1,0 +1,71 @@
+:root {
+  --color-primary: rgb(145, 216, 216);
+  --color-primary-dark: rgb(45, 90, 90);     
+  --color-primary-hover: rgb(115, 186, 186); 
+  --color-primary-active: rgb(95, 166, 166); 
+  --color-primary-completed: #517778;
+  
+  --color-accent: rgb(243, 224, 130);        
+  --color-delete: rgb(255, 139, 148);        
+  --color-delete-hover: rgb(235, 119, 128);
+  
+  --color-bg-dark: rgb(34, 40, 49);         
+  --color-text-light: rgb(238, 238, 238);   
+
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color:var(--color-text-light);
+  background-color: var( --color-bg-dark);
+
+}
+
+body {
+  margin: 0;
+  justify-content: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border-bottom: 2px solid rgba(0,0,0,0.2);
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  background-color: #68A9A9;
+}
+button:hover {
+  border-color: #3d9e9b;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+button:active{
+  transform: translateY(2px)
+}
+
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
