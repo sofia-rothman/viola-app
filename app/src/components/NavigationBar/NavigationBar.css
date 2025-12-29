@@ -1,0 +1,9 @@
+.navbar-container {
+  background-color: blueviolet;
+  z-index: 1;
+  bottom: 0;
+  position: fixed;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
