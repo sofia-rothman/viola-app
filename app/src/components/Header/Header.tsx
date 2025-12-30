@@ -1,26 +1,20 @@
+import useTaskContext from "../../context/TaskContext"
 import "./Header.css"
 
-interface HeaderProps {
-  points: number
-  level: number
-  title: string
-  goal: React.RefObject<number>
-}
-
-const Header = (props: HeaderProps) => {
-  const { points, level, title, goal } = props
+const Header = () => {
+  const tasks = useTaskContext()
 
   return (
     <div className="header">
-      <div>Bonnie {title}</div>
-      <div>Level: {level}</div>
+      <div>Bonnie {tasks.title}</div>
+      <div>Level: {tasks.level}</div>
       <div>
-        <div key={points} className="score-display score-pop">
-          {points} ⭐️
+        <div key={tasks.points} className="score-display score-pop">
+          {tasks.points} ⭐️
         </div>
         <progress
           className="progress-bar"
-          value={points && points / goal.current}
+          value={tasks.points && tasks.points / tasks.goal.current}
         />
       </div>
     </div>

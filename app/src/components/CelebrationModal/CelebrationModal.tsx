@@ -1,30 +1,32 @@
 import confetti from "canvas-confetti"
 import "./CelebrationModal.css"
 import { useEffect } from "react"
+import useTaskContext from "../../context/TaskContext"
 
-interface CelebrationModalProps {
-  clearTasks: () => void
-}
-
-const CelebrationModal = (props: CelebrationModalProps) => {
-  const { clearTasks } = props
+const CelebrationModal = () => {
+  const tasks = useTaskContext()
+  const isGoalReached = tasks.points >= tasks.goal.current
 
   useEffect(() => {
-    confetti({
-      particleCount: 150,
-      spread: 70,
-      origin: { y: 0.6 },
-    })
-  }, [])
+    if (isGoalReached) {
+      confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 },
+      })
+    }
+  }, [isGoalReached])
 
-  return (
-    <div className="modal-container">
-      <div className="modal">
-        <div className="goal">⭐️ Mål uppnått ⭐️</div>
-        Bra Jobbat! <button onClick={clearTasks}>Stäng</button>
+  if (isGoalReached) {
+    return (
+      <div className="modal-container">
+        <div className="modal">
+          <div className="goal">⭐️ Mål uppnått ⭐️</div>
+          Bra Jobbat! <button onClick={tasks.clearTasks}>Stäng</button>
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 export default CelebrationModal
