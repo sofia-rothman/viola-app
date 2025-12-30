@@ -1,16 +1,13 @@
 import { useState } from "react"
 import "./TaskInput.css"
+import useTaskContext from "../../context/TaskContext"
 
-interface TaskInputProps {
-  saveInput: (title: string) => void
-}
-
-const TaskInput = (props: TaskInputProps) => {
-  const { saveInput } = props
+const TaskInput = () => {
+  const tasks = useTaskContext()
   const [title, setTitle] = useState("")
 
   const handleClick = () => {
-    saveInput(title)
+    tasks.addTask(title)
     setTitle("")
   }
 

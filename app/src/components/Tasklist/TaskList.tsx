@@ -2,15 +2,11 @@ import TaskItem from "../TaskItem/TaskItem"
 import deleteIcon from "../../assets/delete-226.svg"
 import "./TaskList.css"
 import type { Task } from "../../types/Task"
+import useTaskContext from "../../context/TaskContext"
+import EmptyState from "../EmptyState/EmptyState"
 
-interface TaskListProps {
-  tasks: Task[]
-  toggleStatus: (taskId: string) => void
-  deleteTask: (taskId: string) => void
-}
-
-const TaskList = (props: TaskListProps) => {
-  const { tasks, toggleStatus, deleteTask } = props
+const TaskList = () => {
+  const taskContext = useTaskContext()
 
   const compareFn = (a: Task, b: Task) => {
     if (a.completed > b.completed) {
@@ -20,28 +16,30 @@ const TaskList = (props: TaskListProps) => {
     } else return 0
   }
 
-  tasks.sort((a, b) => compareFn(a, b))
+  const sortedTasks = taskContext.tasks.sort((a, b) => compareFn(a, b))
 
-  return (
-    <div className="list">
-      {tasks.map((task) => (
-        <div
-          key={task.id}
-          className={`list-item ${task.completed ? "completed" : ""}`}
-        >
-          <TaskItem task={task} toggleStatus={toggleStatus} />
-          <div className="button-container">
-            <button
-              className="delete-button"
-              onClick={() => deleteTask(task.id)}
-            >
-              <img src={deleteIcon} alt="Radera" />
-            </button>
+  if (taskContext.tasks.length > 0) {
+    return (
+      <div className="list">
+        {sortedTasks.map((task) => (
+          <div
+            key={task.id}
+            className={`list-item ${task.completed ? "completed" : ""}`}
+          >
+            <TaskItem task={task} toggleStatus={taskContext.toggleStatus} />
+            <div className="button-container">
+              <button
+                className="delete-button"
+                onClick={() => taskContext.deleteTask(task.id)}
+              >
+                <img src={deleteIcon} alt="Radera" />
+              </button>
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
-  )
+        ))}
+      </div>
+    )
+  } else return <EmptyState />
 }
 
 export default TaskList
