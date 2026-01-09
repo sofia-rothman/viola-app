@@ -17,6 +17,10 @@ export const TaskProvider = (props: TaskProviderProps) => {
     title,
     level,
     goal,
+    purchaseItem,
+    purchasedItems,
+    totalXP,
+    balance,
   } = useTasks()
 
   const values = {
@@ -29,6 +33,10 @@ export const TaskProvider = (props: TaskProviderProps) => {
     title: title,
     level: level,
     goal: goal,
+    purchaseItem: purchaseItem,
+    purchasedItems: purchasedItems,
+    totalXP: totalXP,
+    balance: balance,
   }
 
   return <TaskContext.Provider value={values}>{children}</TaskContext.Provider>

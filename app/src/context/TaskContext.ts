@@ -11,6 +11,10 @@ interface TaskContextValue {
   level: number
   title: string
   goal: React.RefObject<number>
+  purchaseItem: (price: number, title: string) => void
+  purchasedItems: string[]
+  totalXP: number
+  balance: number
 }
 
 export const TaskContext = createContext<TaskContextValue | undefined>(

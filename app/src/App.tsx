@@ -1,11 +1,11 @@
 import "./App.css"
 import Header from "./components/Header/Header"
 import CelebrationModal from "./components/CelebrationModal/CelebrationModal"
-import TodoPage from "./pages/todopage"
 import { Route, Routes } from "react-router-dom"
 import ShopPage from "./pages/shoppage"
 import Navbar from "./components/Navbar/Navbar"
 import useTaskContext from "./context/TaskContext"
+import TaskPage from "./pages/taskpage"
 
 function App() {
   const tasks = useTaskContext()
@@ -16,7 +16,7 @@ function App() {
       {isGoalReached && <CelebrationModal />}
       <Header />
       <Routes>
-        <Route path="/" element={<TodoPage />} />
+        <Route path="/" element={<TaskPage />} />
         <Route path="/shop" element={<ShopPage />} />
       </Routes>
       <Navbar />

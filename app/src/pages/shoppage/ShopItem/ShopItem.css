@@ -1,0 +1,9 @@
+.item-container {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ background-color: aliceblue;
+ width: 50vw;
+ height: 10rem;
+ color:black;
+}

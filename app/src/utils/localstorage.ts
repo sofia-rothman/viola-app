@@ -7,12 +7,15 @@ export function parseJSON(value: string) {
 export function saveDataToLocalStorage(
   title: string,
   tasks?: Task[],
-  XPpoints?: number
+  points?: number,
+  items?: string[]
 ) {
-  if (XPpoints) {
-    window.localStorage.setItem(title, JSON.stringify(XPpoints))
+  if (points) {
+    window.localStorage.setItem(title, JSON.stringify(points))
   } else if (tasks) {
     window.localStorage.setItem(title, JSON.stringify(tasks))
+  } else if (items) {
+    window.localStorage.setItem(title, JSON.stringify(items))
   }
 }
 
