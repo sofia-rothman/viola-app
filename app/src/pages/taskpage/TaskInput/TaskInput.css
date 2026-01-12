@@ -11,5 +11,14 @@ padding-left: 1rem;
 }
 
 .add-button {
-  background-color: var( --color-primary-dark);
+  background: white;
+  color: #f83a85; 
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 12px 28px;
+  font-size: 1rem;
+}
+
+.add-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }

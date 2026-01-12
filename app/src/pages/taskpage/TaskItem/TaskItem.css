@@ -7,5 +7,25 @@
 }
 
 .confirm-button {
-background-color: var(--color-primary-dark);
+  background: linear-gradient(135deg, #62d2a2 0%, #48b087 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(98, 210, 162, 0.3);
+}
+
+.status-button.pending {
+  background: white;
+  color: #2d3436;
+  border: 2px solid #62d2a2; 
+  transition: all 0.3s ease;
+}
+
+.status-button.pending:hover {
+  background: #62d2a2;
+  color: white;
+}
+
+.status-button.completed {
+  background: #dfe6e9; /* Grå/neutral för att visa att den är 'löst' */
+  color: #636e72;
+  border: 2px solid transparent;
 }

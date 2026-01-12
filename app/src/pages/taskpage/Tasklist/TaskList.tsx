@@ -24,7 +24,7 @@ const TaskList = () => {
         {sortedTasks.map((task) => (
           <div
             key={task.id}
-            className={`list-item ${task.completed ? "completed" : ""}`}
+            className={`list-item ${task.completed && "completed"}`}
           >
             <TaskItem task={task} toggleStatus={taskContext.toggleStatus} />
             <div className="button-container">

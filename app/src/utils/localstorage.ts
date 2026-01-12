@@ -10,7 +10,7 @@ export function saveDataToLocalStorage(
   points?: number,
   items?: string[]
 ) {
-  if (points) {
+  if (points !== undefined) {
     window.localStorage.setItem(title, JSON.stringify(points))
   } else if (tasks) {
     window.localStorage.setItem(title, JSON.stringify(tasks))
