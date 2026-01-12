@@ -14,6 +14,15 @@ export const useTasks = () => {
     const data = getDataFromLocalStorage("XPpoints")
     return data ? Number.parseInt(data) : 0
   })
+  const [balance, setBalance] = useState<number>(() => {
+    const data = getDataFromLocalStorage("balance")
+    return data ? Number.parseInt(data) : 0
+  })
+  const [purchasedItems, setPurchasedItems] = useState<string[]>(() => {
+    const data = getDataFromLocalStorage("items")
+    return data ? data : []
+  })
+
   const goal = useRef(20)
   const title = [
     "Sysselsafari 🐾",
@@ -53,6 +62,7 @@ export const useTasks = () => {
 
   const clearTasks = () => {
     setTotalXP((prev) => prev + getPoints())
+    setBalance((prev) => prev + getPoints())
     setTasks((prev) => {
       return prev.filter((p) => p.completed === false)
     })
@@ -64,6 +74,14 @@ export const useTasks = () => {
     )
   }
 
+  const purchaseItem = (price: number, title: string) => {
+    if (price > balance) {
+      return false
+    }
+    setBalance((prev) => prev - price)
+    setPurchasedItems((prev) => [...prev, title])
+  }
+
   useEffect(() => {
     saveDataToLocalStorage("tasks", tasks)
   }, [tasks])
@@ -71,6 +89,14 @@ export const useTasks = () => {
   useEffect(() => {
     saveDataToLocalStorage("XPpoints", undefined, totalXP)
   }, [totalXP])
+
+  useEffect(() => {
+    saveDataToLocalStorage("balance", undefined, balance)
+  }, [balance])
+
+  useEffect(() => {
+    saveDataToLocalStorage("items", undefined, undefined, purchasedItems)
+  }, [purchasedItems])
 
   return {
     tasks,
@@ -82,5 +108,9 @@ export const useTasks = () => {
     level: getLevel(),
     title: getTitle(),
     goal,
+    balance,
+    purchaseItem,
+    purchasedItems,
+    totalXP,
   }
 }

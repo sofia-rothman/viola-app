@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
 :root {
   --color-primary: rgb(145, 216, 216);
   --color-primary-dark: rgb(45, 90, 90);     
@@ -12,13 +14,18 @@
   --color-bg-dark: rgb(34, 40, 49);         
   --color-text-light: rgb(238, 238, 238);   
 
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Inter, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
   color:var(--color-text-light);
   background-color: var( --color-bg-dark);
+
+  --primary-gradient: linear-gradient(135deg, #f83a85 0%, #f18c22 100%);
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --card-bg-completed: rgba(255, 255, 255, 0.5);
+  --text-dark: #2d3436;
 
 }
 
@@ -27,6 +34,10 @@ body {
   justify-content: center;
   min-width: 320px;
   min-height: 100vh;
+  background: var(--primary-gradient);
+  background-attachment: fixed;
+  font-family: 'Inter', sans-serif;
+  color: white;
 }
 
 h1 {
@@ -35,15 +46,16 @@ h1 {
 }
 
 button {
-  border-radius: 8px;
-  border-bottom: 2px solid rgba(0,0,0,0.2);
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
+  font-family: 'Inter', sans-serif;
+  border-radius: 50px; 
+  border: none;
+  font-weight: 600;
   cursor: pointer;
-  transition: border-color 0.25s;
-  background-color: #68A9A9;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 20px;
 }
 button:hover {
   border-color: #3d9e9b;
@@ -54,18 +66,4 @@ button:focus-visible {
 }
 button:active{
   transform: translateY(2px)
-}
-
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }

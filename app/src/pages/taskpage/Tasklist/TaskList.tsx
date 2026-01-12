@@ -1,9 +1,9 @@
 import TaskItem from "../TaskItem/TaskItem"
-import deleteIcon from "../../assets/delete-226.svg"
+import deleteIcon from "../../../assets/delete-226.svg"
 import "./TaskList.css"
-import type { Task } from "../../types/Task"
-import useTaskContext from "../../context/TaskContext"
-import EmptyState from "../EmptyState/EmptyState"
+import useTaskContext from "../../../context/TaskContext"
+import type { Task } from "../../../types/Task"
+import EmptyState from "../../../components/EmptyState/EmptyState"
 
 const TaskList = () => {
   const taskContext = useTaskContext()
@@ -24,7 +24,7 @@ const TaskList = () => {
         {sortedTasks.map((task) => (
           <div
             key={task.id}
-            className={`list-item ${task.completed ? "completed" : ""}`}
+            className={`list-item ${task.completed && "completed"}`}
           >
             <TaskItem task={task} toggleStatus={taskContext.toggleStatus} />
             <div className="button-container">

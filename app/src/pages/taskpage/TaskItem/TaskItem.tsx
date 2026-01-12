@@ -1,4 +1,4 @@
-import type { Task } from "../../types/Task"
+import type { Task } from "../../../types/Task"
 import "./TaskItem.css"
 
 interface TaskProps {
@@ -14,10 +14,12 @@ const TaskItem = (props: TaskProps) => {
       <>{task.title}</>
       <div>
         <button
-          className="confirm-button"
+          className={`status-button ${
+            task.completed ? "completed" : "pending"
+          }`}
           onClick={() => toggleStatus(task.id)}
         >
-          {task.completed ? "Klar" : "Pågående"}
+          {task.completed ? "Ångra" : "Markera som klar"}
         </button>
       </div>
     </div>

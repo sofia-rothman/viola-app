@@ -6,8 +6,12 @@ const Header = () => {
 
   return (
     <div className="header">
-      <div>Bonnie {tasks.title}</div>
-      <div>Level: {tasks.level}</div>
+      <div>
+        Bonnie {tasks.title} Level: {tasks.level}{" "}
+      </div>
+      <div>
+        XP: {tasks.totalXP} Wallet: {tasks.balance}
+      </div>
       <div>
         <div key={tasks.points} className="score-display score-pop">
           {tasks.points} ⭐️

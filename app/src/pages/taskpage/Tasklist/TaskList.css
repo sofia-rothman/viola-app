@@ -1,0 +1,55 @@
+.list {
+  padding: 1rem;
+  display: grid;
+  row-gap: 1rem;
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.list-item {
+  background: var(--card-bg);
+  color: var(--text-dark);
+  border-radius: 20px;
+  margin-bottom: 12px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.list-item.completed {
+  background-color:var(--card-bg-completed);
+  
+}
+
+.list-item:hover {
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 1); 
+}
+
+.button-container {
+ padding-right: 1rem;
+}
+
+.delete-button {
+ background: transparent;
+  padding: 8px;
+  opacity: 0.4; 
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.delete-button:hover {
+  background-color: var(--color-delete-hover);
+}
+
+.delete-button img {
+  width: 1.5rem; 
+  height: 1.5rem;
+  filter: invert(40%) sepia(10%) saturate(2000%) hue-rotate(320deg) brightness(90%) contrast(90%);
+}
