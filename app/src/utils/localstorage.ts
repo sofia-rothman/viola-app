@@ -1,30 +1,18 @@
-import type { Task } from "../types/Task"
-
-export function parseJSON(value: string) {
-  return value === "undefined" ? undefined : JSON.parse(value)
-}
-
-export function saveDataToLocalStorage(
-  title: string,
-  tasks?: Task[],
-  points?: number,
-  items?: string[]
-) {
-  if (points !== undefined) {
-    window.localStorage.setItem(title, JSON.stringify(points))
-  } else if (tasks) {
-    window.localStorage.setItem(title, JSON.stringify(tasks))
-  } else if (items) {
-    window.localStorage.setItem(title, JSON.stringify(items))
-  }
-}
-
-export function getDataFromLocalStorage(title: string) {
-  const storedItemsJson = window.localStorage.getItem(title)
-  const storedItems = storedItemsJson && parseJSON(storedItemsJson)
-
-  if (storedItems && storedItems != undefined) {
-    return storedItems
-  }
-  return null
+export const storage = {
+  save: <T>(key: string, value: T): void => {
+    try {
+      window.localStorage.setItem(key, JSON.stringify(value))
+    } catch (e) {
+      console.error("Error saving to LocalStorage", e)
+    }
+  },
+  get: <T>(key: string): T | null => {
+    try {
+      const storedItemsJson = window.localStorage.getItem(key)
+      return storedItemsJson ? JSON.parse(storedItemsJson) : null
+    } catch (e) {
+      console.error("Error fetching from LocalStorage", e)
+      return null
+    }
+  },
 }

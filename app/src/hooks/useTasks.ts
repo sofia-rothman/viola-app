@@ -1,25 +1,22 @@
 import { useEffect, useRef, useState } from "react"
-import {
-  getDataFromLocalStorage,
-  saveDataToLocalStorage,
-} from "../utils/localstorage"
+import { storage } from "../utils/localstorage"
 import { createTask, type Task } from "../types/Task"
 
 export const useTasks = () => {
   const [tasks, setTasks] = useState<Task[]>(() => {
-    const data = getDataFromLocalStorage("tasks")
+    const data = storage.get<Task[]>("tasks")
     return data ? data : []
   })
   const [totalXP, setTotalXP] = useState<number>(() => {
-    const data = getDataFromLocalStorage("XPpoints")
-    return data ? Number.parseInt(data) : 0
+    const data = storage.get<number>("XPpoints")
+    return data ? data : 0
   })
   const [balance, setBalance] = useState<number>(() => {
-    const data = getDataFromLocalStorage("balance")
-    return data ? Number.parseInt(data) : 0
+    const data = storage.get<number>("balance")
+    return data ? data : 0
   })
   const [purchasedItems, setPurchasedItems] = useState<string[]>(() => {
-    const data = getDataFromLocalStorage("items")
+    const data = storage.get<string[]>("items")
     return data ? data : []
   })
 
@@ -83,19 +80,19 @@ export const useTasks = () => {
   }
 
   useEffect(() => {
-    saveDataToLocalStorage("tasks", tasks)
+    storage.save<Task[]>("tasks", tasks)
   }, [tasks])
 
   useEffect(() => {
-    saveDataToLocalStorage("XPpoints", undefined, totalXP)
+    storage.save<number>("XPpoints", totalXP)
   }, [totalXP])
 
   useEffect(() => {
-    saveDataToLocalStorage("balance", undefined, balance)
+    storage.save<number>("balance", balance)
   }, [balance])
 
   useEffect(() => {
-    saveDataToLocalStorage("items", undefined, undefined, purchasedItems)
+    storage.save<string[]>("items", purchasedItems)
   }, [purchasedItems])
 
   return {
@@ -105,7 +102,9 @@ export const useTasks = () => {
     deleteTask,
     points: getPoints(),
     clearTasks,
+    // eslint-disable-next-line react-hooks/refs
     level: getLevel(),
+    // eslint-disable-next-line react-hooks/refs
     title: getTitle(),
     goal,
     balance,
