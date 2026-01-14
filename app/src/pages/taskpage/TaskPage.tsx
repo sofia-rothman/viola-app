@@ -1,5 +1,5 @@
-import TaskInput from "./TaskInput/TaskInput"
-import TaskList from "./Tasklist/TaskList"
+import TaskInput from "./components/TaskInput/TaskInput"
+import TaskList from "./components/TaskList/TaskList"
 import "./TaskPage.css"
 
 const TaskPage = () => {

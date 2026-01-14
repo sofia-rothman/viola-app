@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import useTaskContext from "../../context/TaskContext"
 import { rewards } from "../../data/rewards"
-import ShopItem from "./ShopItem/ShopItem"
 import "./ShopPage.css"
-import PurchasedItem from "./PurchasedItem/PurchasedItem"
+import PurchaseRow from "./components/PurchaseRow/PurchaseRow"
+import RewardCard from "./components/RewardCard/RewardCard"
 
 const ShopPage = () => {
   const taskContext = useTaskContext()
@@ -31,13 +31,13 @@ const ShopPage = () => {
       Du har {displayBalance} ⭐️ att handla för
       <div className="shop-grid">
         {rewards.map((item) => (
-          <ShopItem key={item.id} item={item} />
+          <RewardCard key={item.id} item={item} />
         ))}
       </div>
       <div>Mina Belöningar</div>
       <div className="my-rewards-list">
-        {taskContext.purchasedItems.map((item) => (
-          <PurchasedItem key={item.instanceId} item={item} />
+        {taskContext.purchase.map((item) => (
+          <PurchaseRow key={item.instanceId} item={item} />
         ))}
       </div>
     </div>

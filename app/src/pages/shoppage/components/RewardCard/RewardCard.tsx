@@ -1,14 +1,14 @@
 import { useNavigate } from "react-router-dom"
-import useTaskContext from "../../../context/TaskContext"
-import "./ShopItem.css"
+import useTaskContext from "../../../../context/TaskContext"
+import "./RewardCard.css"
 import { useState } from "react"
-import type { Reward } from "../../../types/Reward"
+import type { Reward } from "../../../../types/Reward"
 
-interface ShopItemProps {
+interface RewardCardProps {
   item: Reward
 }
 
-const ShopItem = (props: ShopItemProps) => {
+const RewardCard = (props: RewardCardProps) => {
   const { item } = props
   const taskContext = useTaskContext()
   const [isPurchased, setIsPurchased] = useState(false)
@@ -46,4 +46,4 @@ const ShopItem = (props: ShopItemProps) => {
   )
 }
 
-export default ShopItem
+export default RewardCard
