@@ -18,7 +18,7 @@ export const TaskProvider = (props: TaskProviderProps) => {
     level,
     goal,
     purchaseItem,
-    purchasedItems,
+    purchase,
     totalXP,
     balance,
   } = useTasks()
@@ -34,7 +34,7 @@ export const TaskProvider = (props: TaskProviderProps) => {
     level: level,
     goal: goal,
     purchaseItem: purchaseItem,
-    purchasedItems: purchasedItems,
+    purchase: purchase,
     totalXP: totalXP,
     balance: balance,
   }

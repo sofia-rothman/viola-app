@@ -1,11 +1,8 @@
 import { useEffect, useRef, useState } from "react"
 import { storage } from "../utils/localstorage"
 import { createTask, type Task } from "../types/Task"
-import {
-  createPurchasedReward,
-  type PurchasedReward,
-  type Reward,
-} from "../types/Reward"
+import { type Reward } from "../types/Reward"
+import { createPurchase, type Purchase } from "../types/Purchase"
 
 export const useTasks = () => {
   const [tasks, setTasks] = useState<Task[]>(() => {
@@ -20,12 +17,10 @@ export const useTasks = () => {
     const data = storage.get<number>("balance")
     return data ? data : 0
   })
-  const [purchasedItems, setPurchasedItems] = useState<PurchasedReward[]>(
-    () => {
-      const data = storage.get<PurchasedReward[]>("items")
-      return data ? data : []
-    }
-  )
+  const [purchase, setPurchase] = useState<Purchase[]>(() => {
+    const data = storage.get<Purchase[]>("items")
+    return data ? data : []
+  })
 
   const goal = useRef(20)
   const title = [
@@ -82,9 +77,9 @@ export const useTasks = () => {
     if (item.price > balance) {
       return false
     }
-    const purchasedItem = createPurchasedReward(item)
+    const purchasedItem = createPurchase(item)
     setBalance((prev) => prev - item.price)
-    setPurchasedItems((prev) => [...prev, purchasedItem])
+    setPurchase((prev) => [...prev, purchasedItem])
   }
 
   useEffect(() => {
@@ -100,8 +95,8 @@ export const useTasks = () => {
   }, [balance])
 
   useEffect(() => {
-    storage.save<PurchasedReward[]>("items", purchasedItems)
-  }, [purchasedItems])
+    storage.save<Purchase[]>("items", purchase)
+  }, [purchase])
 
   return {
     tasks,
@@ -117,7 +112,7 @@ export const useTasks = () => {
     goal,
     balance,
     purchaseItem,
-    purchasedItems,
+    purchase,
     totalXP,
   }
 }
