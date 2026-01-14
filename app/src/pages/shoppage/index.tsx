@@ -3,6 +3,7 @@ import useTaskContext from "../../context/TaskContext"
 import { rewards } from "../../data/rewards"
 import ShopItem from "./ShopItem/ShopItem"
 import "./ShopPage.css"
+import PurchasedItem from "./PurchasedItem/PurchasedItem"
 
 const ShopPage = () => {
   const taskContext = useTaskContext()
@@ -22,7 +23,6 @@ const ShopPage = () => {
       })
     }, 70)
 
-    // 4. Cleanup-funktion (Viktigast!)
     return () => clearInterval(timer)
   }, [taskContext.balance])
 
@@ -37,10 +37,7 @@ const ShopPage = () => {
       <div>Mina Belöningar</div>
       <div className="my-rewards-list">
         {taskContext.purchasedItems.map((item) => (
-          <div className="my-rewards-item">
-            <div>{item}</div>
-            <div>Redo att användas ✅</div>
-          </div>
+          <PurchasedItem key={item.instanceId} item={item} />
         ))}
       </div>
     </div>

@@ -2,14 +2,10 @@ import { useNavigate } from "react-router-dom"
 import useTaskContext from "../../../context/TaskContext"
 import "./ShopItem.css"
 import { useState } from "react"
+import type { Reward } from "../../../types/Reward"
 
 interface ShopItemProps {
-  item: {
-    id: number
-    title: string
-    price: number
-    emoji: string
-  }
+  item: Reward
 }
 
 const ShopItem = (props: ShopItemProps) => {
@@ -22,7 +18,7 @@ const ShopItem = (props: ShopItemProps) => {
 
   const handleClick = () => {
     if (canAfford) {
-      taskContext.purchaseItem(item.price, item.title)
+      taskContext.purchaseItem(item)
       setIsPurchased(true)
 
       setTimeout(() => {

@@ -1,5 +1,6 @@
 import { createContext, useContext } from "react"
 import type { Task } from "../types/Task"
+import type { PurchasedReward, Reward } from "../types/Reward"
 
 interface TaskContextValue {
   tasks: Task[]
@@ -11,8 +12,8 @@ interface TaskContextValue {
   level: number
   title: string
   goal: React.RefObject<number>
-  purchaseItem: (price: number, title: string) => void
-  purchasedItems: string[]
+  purchaseItem: (item: Reward) => false | undefined
+  purchasedItems: PurchasedReward[]
   totalXP: number
   balance: number
 }
