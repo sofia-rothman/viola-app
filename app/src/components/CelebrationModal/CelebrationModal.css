@@ -9,16 +9,23 @@
 }
 
 .modal {
+  padding: 20px 60px;
   display: grid;
   justify-content: center;
   align-items: center;
-  width: 70vw;
-  height: 50vh;
-  background-color: rgb(135, 179, 220);
+  width: 50vw;
+  height: 30vh;
+  background-color:  rgba(248, 58, 133, 0.5);;
+  backdrop-filter: blur(20px);
   position: absolute;
   border-radius: 5%;
-  border: 3px solid var(--color-accent);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   animation: pop 0.3s ease-out;
+}
+
+.close-button {
+  padding: 20px;
+  font-size: 1.4em;
 }
 
 @keyframes pop {
