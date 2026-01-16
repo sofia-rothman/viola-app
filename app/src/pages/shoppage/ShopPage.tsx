@@ -34,7 +34,7 @@ const ShopPage = () => {
           <RewardCard key={item.id} item={item} />
         ))}
       </div>
-      <div>Mina Belöningar</div>
+      <div>Min köphistorik</div>
       <div className="my-rewards-list">
         {taskContext.purchase.map((item) => (
           <PurchaseRow key={item.instanceId} item={item} />
