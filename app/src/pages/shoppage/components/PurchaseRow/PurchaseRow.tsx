@@ -7,7 +7,6 @@ interface PurchaseRowProps {
 
 const PurchaseRow = (props: PurchaseRowProps) => {
   const { item } = props
-  // const [date, setDate] = useState("")
 
   const dateFormatted = () => {
     return item.dateOfPurchase.toLocaleDateString()

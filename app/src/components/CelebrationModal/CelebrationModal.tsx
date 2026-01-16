@@ -8,17 +8,26 @@ const CelebrationModal = () => {
 
   useEffect(() => {
     confetti({
-      particleCount: 150,
-      spread: 70,
-      origin: { y: 0.6 },
+      particleCount: 500,
+      spread: 100,
+      startVelocity: 80,
+      ticks: 300,
+      origin: { y: 0.7 },
     })
   }, [])
 
   return (
     <div className="modal-container">
       <div className="modal">
-        <div className="goal">⭐️ Mål uppnått ⭐️</div>
-        Bra Jobbat! <button onClick={tasks.clearTasks}>Stäng</button>
+        <h3>⭐️ Mål uppnått ⭐️</h3>
+        <h2>Bra Jobbat!</h2>
+        <h3>
+          Du har nått dina mål för dagen. Fortsätt så här för att hålla sviten
+          vid liv!
+        </h3>
+        <button className="close-button" onClick={tasks.clearTasks}>
+          Stäng
+        </button>
       </div>
     </div>
   )

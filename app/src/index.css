@@ -1,32 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
 :root {
-  --color-primary: rgb(145, 216, 216);
-  --color-primary-dark: rgb(45, 90, 90);     
-  --color-primary-hover: rgb(115, 186, 186); 
-  --color-primary-active: rgb(95, 166, 166); 
-  --color-primary-completed: #517778;
-  
+  --primary-gradient: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  --color-primary: #f83a85;
+  --color-secondary: #f18c22;
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --card-bg-completed: rgba(255, 255, 255, 0.5);
+  --text-dark: #2d3436;
+
   --color-accent: rgb(243, 224, 130);        
   --color-delete: rgb(255, 139, 148);        
   --color-delete-hover: rgb(235, 119, 128);
-  
-  --color-bg-dark: rgb(34, 40, 49);         
+         
   --color-text-light: rgb(238, 238, 238);   
 
   font-family: Inter, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  font-size: 1em;
 
-  color-scheme: light dark;
   color:var(--color-text-light);
-  background-color: var( --color-bg-dark);
-
-  --primary-gradient: linear-gradient(135deg, #f83a85 0%, #f18c22 100%);
-  --card-bg: rgba(255, 255, 255, 0.9);
-  --card-bg-completed: rgba(255, 255, 255, 0.5);
-  --text-dark: #2d3436;
-
 }
 
 body {
@@ -45,20 +38,31 @@ h1 {
   line-height: 1.1;
 }
 
+h2 {
+  font-size: 2.2em;
+  line-height: 1.1;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 1.6em;
+  line-height: 1.1;
+  font-weight: 300;
+}
+
 button {
+  background: white;
   font-family: 'Inter', sans-serif;
   border-radius: 50px; 
   border: none;
   font-weight: 600;
+  font-size: 1em;
   cursor: pointer;
   transition: all 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 20px;
-}
-button:hover {
-  border-color: #3d9e9b;
+  padding: 10px 20px;
 }
 button:focus,
 button:focus-visible {
