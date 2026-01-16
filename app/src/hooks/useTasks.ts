@@ -19,7 +19,9 @@ export const useTasks = () => {
   })
   const [purchase, setPurchase] = useState<Purchase[]>(() => {
     const data = storage.get<Purchase[]>("items")
-    return data ? data : []
+    return data
+      ? data.map((p) => ({ ...p, dateOfPurchase: new Date(p.dateOfPurchase) }))
+      : []
   })
 
   const goal = useRef(20)

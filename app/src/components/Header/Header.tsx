@@ -10,7 +10,7 @@ const Header = () => {
         Bonnie {tasks.title} Level: {tasks.level}{" "}
       </div>
       <div>
-        XP: {tasks.totalXP} Wallet: {tasks.balance}
+        XP: {tasks.totalXP} Plånbok: {tasks.balance}
       </div>
       <div>
         <div key={tasks.points} className="score-display score-pop">
