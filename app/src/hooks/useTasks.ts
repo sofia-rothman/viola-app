@@ -26,12 +26,12 @@ export const useTasks = () => {
 
   const goal = useRef(20)
   const title = [
-    "Sysselsafari 🐾",
-    "Junior-fixare 🛠️",
-    "Hemmets Hjälte 🦸‍♀️",
-    "Ordningsexpert ✨",
-    "Guldstjärne-mästare 🌟",
-    "Legendarisk Fixar-drottning 👑",
+    "Sysselsafari",
+    "Junior-fixare",
+    "Hemmets Hjälte",
+    "Ordningsexpert",
+    "Guldstjärne-mästare",
+    "Legendarisk Fixar-drottning",
   ]
 
   const getPoints = () => {

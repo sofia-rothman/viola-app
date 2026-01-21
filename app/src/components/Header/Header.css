@@ -1,10 +1,29 @@
 .header {
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  background: linear-gradient(135deg, #F43E6A 0%, #A44163 100%);
+  min-height: 30vh;
+  border-radius: 0 0 50px 50px;
   padding: 1.5rem;
   color: white;
-  border-radius: 0 0 20px 20px;
+}
+
+.user-stats-card {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  margin: 0 0 2rem 0;
+  padding: 1rem 2.2rem;
+}
+
+.name {
+  margin: 1%;
+}
+
+.name svg {
+  height: 3rem;
+  width: 3rem;
+  fill:#ffcc00;
+  margin-bottom: -8px;
 }
 
 @keyframes pop {
@@ -17,6 +36,88 @@
   animation: pop 0.3s ease-out;
 }
 
-.progress-bar {
-  width: 5rem;
+.level {
+  font-weight: 100;
+  font-size: 25px;
+  color: rgb(231 228 228 / 79%);
+}
+
+.score-display {
+  display: flex;
+  justify-content: space-between;
+  font-size: 25px;
+  font-weight: 500;
+  padding: 0 8px 10px 8px;
+}
+
+.progress-outer {
+  background-color: rgba(0, 0, 0, 0.2); 
+  height: 24px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center; 
+  padding: 0 4px;     
+}
+
+.progress-inner {
+  background-color: #ffcc00;
+  height: 12px;      
+  border-radius: 10px;
+  transition: width 0.5s ease-out; 
+}
+
+.stat-card-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+  justify-content: flex-start;
+
+}
+
+.stat-card {
+  background: rgb(13 12 12 / 9%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  margin-top: 2rem;
+  padding: 1rem 2.2rem;
+  display: flex;
+  padding: 1rem;
+}
+
+.stat-card__icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4rem;
+  height: 4rem;
+  background: rgba(242, 240, 240, 0.269);
+  border-radius: 25px;
+  margin: 0 1.2rem 0 0.8rem;
+} 
+
+.stat-card__icon-wrapper svg{
+  width: 3rem;
+  height: 3rem;
+  filter: invert(40%) sepia(10%) saturate(2000%) hue-rotate(320deg) brightness(90%) contrast(90%);
+} 
+
+.stat-card__content {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.stat-card__label {
+  font-weight: 100;
+  font-size: 22px;
+  color:rgba(234, 232, 232, 0.589);
+}
+
+.stat-card__value {
+  font-weight: 500;
+  font-size: 32px;
+  color:rgb(250, 250, 250);
 }
