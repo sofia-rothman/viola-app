@@ -1,25 +1,36 @@
 import useTaskContext from "../../context/TaskContext"
 import "./Header.css"
+import CrownIcon from "../../../../app/src/assets/crown.svg?react"
+import StatCard from "./components/StatCard/StatCard"
+import ProgressBar from "./components/ProgressBar/ProgressBar"
 
 const Header = () => {
   const tasks = useTaskContext()
 
   return (
     <div className="header">
-      <div>
-        Bonnie {tasks.title} Level: {tasks.level}{" "}
-      </div>
-      <div>
-        XP: {tasks.totalXP} Plånbok: {tasks.balance}
-      </div>
-      <div>
-        <div key={tasks.points} className="score-display score-pop">
-          {tasks.points} ⭐️
+      <div className="user-stats-card">
+        <h2 className="name">
+          Bonnie <CrownIcon />
+        </h2>
+
+        <div className="level">
+          {tasks.title} • Level: {tasks.level}{" "}
         </div>
-        <progress
-          className="progress-bar"
-          value={tasks.points && tasks.points / tasks.goal.current}
-        />
+
+        <ProgressBar points={tasks.points} goal={tasks.goal} />
+
+        <div>
+          <div className="stat-card-container">
+            <StatCard
+              icon={"wallet"}
+              label={"Plånbok"}
+              value={`${tasks.balance} kr`}
+            />
+
+            <StatCard icon={"star"} label={"XP"} value={`${tasks.totalXP}`} />
+          </div>
+        </div>
       </div>
     </div>
   )

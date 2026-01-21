@@ -1,22 +1,41 @@
 .header {
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  background: linear-gradient(135deg, #F43E6A 0%, #A44163 100%);
+  min-height: 30vh;
+  border-radius: 0 0 50px 50px;
   padding: 1.5rem;
   color: white;
-  border-radius: 0 0 20px 20px;
 }
 
-@keyframes pop {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.4); color: var(--color-accent); }
-  100% { transform: scale(1); }
+.user-stats-card {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  margin: 0 0 2rem 0;
+  padding: 1rem 2.2rem;
 }
 
-.score-pop {
-  animation: pop 0.3s ease-out;
+.name {
+  margin: 1%;
 }
 
-.progress-bar {
-  width: 5rem;
+.name svg {
+  height: 3rem;
+  width: 3rem;
+  fill:#ffcc00;
+  margin-bottom: -8px;
+}
+
+.level {
+  font-weight: 100;
+  font-size: 25px;
+  color: rgb(231 228 228 / 79%);
+}
+
+.stat-card-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+  justify-content: flex-start;
+
 }
