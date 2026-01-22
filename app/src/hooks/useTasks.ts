@@ -25,9 +25,8 @@ export const useTasks = () => {
   const getPoints = () => {
     if (tasks && tasks.length > 0) {
       const completedTasks = tasks.filter((task) => task.completed)
-      console.log("POINTS: " + completedTasks.length * 10)
       return completedTasks.length * 10
-    }
+    } else return 0
   }
 
   const getLevel = () => {
@@ -127,84 +126,6 @@ export const useTasks = () => {
 
     saveData()
   }, [tasks, balance, totalXP, purchase, isLoading])
-
-  /*   useEffect(() => {
-    if (!isLoading) {
-      const saveData = async () => {
-        setIsLoading(true)
-
-        try {
-          await taskRepository.saveTasks(tasks)
-        } catch (err) {
-          setError("Kunde inte spara data... " + err)
-        } finally {
-          setIsLoading(false)
-        }
-      }
-
-      saveData()
-    }
-  }, [tasks])
-
-  useEffect(() => {
-    console.log("saving XP: " + totalXP)
-
-    if (!isLoading) {
-      const saveData = async () => {
-        setIsLoading(true)
-
-        try {
-          await taskRepository.saveXPpoints(totalXP)
-        } catch (err) {
-          setError("Kunde inte spara data... " + err)
-        } finally {
-          setIsLoading(false)
-        }
-      }
-
-      saveData()
-    }
-  }, [totalXP])
-
-  useEffect(() => {
-    console.log("saving balance: " + balance)
-
-    if (!isLoading) {
-      const saveData = async () => {
-        setIsLoading(true)
-
-        try {
-          await taskRepository.saveBalance(balance)
-        } catch (err) {
-          setError("Kunde inte spara data... " + err)
-        } finally {
-          setIsLoading(false)
-        }
-      }
-
-      saveData()
-    }
-  }, [balance])
-
-  useEffect(() => {
-    console.log("saving purchase: " + purchase)
-
-    if (!isLoading) {
-      const saveData = async () => {
-        setIsLoading(true)
-
-        try {
-          await taskRepository.savePurchase(purchase)
-        } catch (err) {
-          setError("Kunde inte spara data... " + err)
-        } finally {
-          setIsLoading(false)
-        }
-      }
-
-      saveData()
-    }
-  }, [purchase]) */
 
   return {
     tasks,
