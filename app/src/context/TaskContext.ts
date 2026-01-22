@@ -17,6 +17,7 @@ interface TaskContextValue {
   purchase: Purchase[]
   totalXP: number
   balance: number
+  isLoading: boolean
 }
 
 export const TaskContext = createContext<TaskContextValue | undefined>(

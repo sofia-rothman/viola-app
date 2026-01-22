@@ -16,12 +16,12 @@ const TaskList = () => {
     } else return 0
   }
 
-  const sortedTasks = taskContext.tasks.sort((a, b) => compareFn(a, b))
+  const sortedTasks = taskContext?.tasks?.sort((a, b) => compareFn(a, b))
 
-  if (taskContext.tasks.length > 0) {
+  if (taskContext?.tasks?.length > 0) {
     return (
       <div className="list">
-        {sortedTasks.map((task) => (
+        {sortedTasks?.map((task) => (
           <div
             key={task.id}
             className={`list-item ${task.completed && "completed"}`}
