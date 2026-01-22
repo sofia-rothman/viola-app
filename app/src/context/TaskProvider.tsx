@@ -21,6 +21,7 @@ export const TaskProvider = (props: TaskProviderProps) => {
     purchase,
     totalXP,
     balance,
+    isLoading,
   } = useTasks()
 
   const values = {
@@ -37,6 +38,7 @@ export const TaskProvider = (props: TaskProviderProps) => {
     purchase: purchase,
     totalXP: totalXP,
     balance: balance,
+    isLoading: isLoading,
   }
 
   return <TaskContext.Provider value={values}>{children}</TaskContext.Provider>

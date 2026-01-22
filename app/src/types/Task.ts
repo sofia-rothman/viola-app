@@ -6,6 +6,7 @@ export interface Task {
 
 export const createTask = (rawTitle: string): Task | null => {
   const title = rawTitle.trim()
+  console.log("I create task: " + title)
 
   if (title.length < 2) {
     console.log("För få bokstäver")
