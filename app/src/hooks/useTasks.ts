@@ -10,6 +10,7 @@ export const useTasks = () => {
   const [balance, setBalance] = useState<number>(0)
   const [purchase, setPurchase] = useState<Purchase[]>([])
   const [isLoading, setIsLoading] = useState(false)
+  const [hasLoaded, setHasLoaded] = useState(false)
   const [error, setError] = useState("")
 
   const goal = useRef(20)
@@ -40,7 +41,6 @@ export const useTasks = () => {
 
   const addTask = (title: string) => {
     const taskTemp: Task | null = createTask(title)
-    console.log("trying too add task: " + taskTemp)
 
     if (taskTemp) {
       if (tasks?.length > 0) {
@@ -65,9 +65,10 @@ export const useTasks = () => {
   }
 
   const toggleStatus = (taskId: string) => {
-    console.log("in toggle status: " + taskId)
     setTasks((prev) =>
-      prev.map((p) => (p.id === taskId ? { ...p, completed: !p.completed } : p))
+      prev.map((p) =>
+        p.id === taskId ? { ...p, completed: !p.completed } : p,
+      ),
     )
   }
 
@@ -81,8 +82,8 @@ export const useTasks = () => {
   }
 
   useEffect(() => {
+    setIsLoading(true)
     const fetchData = async () => {
-      setIsLoading(true)
       setError("")
 
       try {
@@ -97,6 +98,7 @@ export const useTasks = () => {
         setBalance(balance || 0)
         setTotalXP(XPpoints || 0)
         setPurchase(purchase || [])
+        setHasLoaded(true)
       } catch (err) {
         console.error("Hämtning misslyckades:", err)
         setError("Kunde inte hämta din sparade data.")
@@ -108,7 +110,7 @@ export const useTasks = () => {
   }, [])
 
   useEffect(() => {
-    if (isLoading) return
+    if (isLoading || !hasLoaded) return
 
     const saveData = async () => {
       try {

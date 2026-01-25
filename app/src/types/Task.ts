@@ -2,11 +2,11 @@ export interface Task {
   id: string
   title: string
   completed: boolean
+  isApproved: boolean
 }
 
 export const createTask = (rawTitle: string): Task | null => {
   const title = rawTitle.trim()
-  console.log("I create task: " + title)
 
   if (title.length < 2) {
     console.log("För få bokstäver")
@@ -17,5 +17,6 @@ export const createTask = (rawTitle: string): Task | null => {
     id: crypto.randomUUID(),
     title: title.trim(),
     completed: false,
+    isApproved: false,
   }
 }

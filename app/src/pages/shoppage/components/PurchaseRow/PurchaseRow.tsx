@@ -7,7 +7,7 @@ interface PurchaseRowProps {
 
 const PurchaseRow = (props: PurchaseRowProps) => {
   const { item } = props
-  const dateFormatted = item.dateOfPurchase.toLocaleDateString()
+  const dateFormatted = item.dateOfPurchase?.toLocaleDateString()
 
   return (
     <div className="my-rewards-item">

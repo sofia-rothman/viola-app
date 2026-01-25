@@ -8,7 +8,7 @@ export const storage = {
   },
   get: <T>(key: string): T | null => {
     try {
-      const storedItemsJson = window.localStorage.getItem
+      const storedItemsJson = window.localStorage.getItem(key)
       return storedItemsJson ? JSON.parse(storedItemsJson) : null
     } catch (e) {
       console.error("Error fetching from LocalStorage", e)
