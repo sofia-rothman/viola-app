@@ -16,7 +16,7 @@ const ProgressBar = (props: ProgressBarProps) => {
         <div key={points} className="score-display score-pop">
           Poäng: {points}
         </div>
-        <div>Nästa nivå: {goal.current}</div>
+        <div>Nästa mål: {goal.current}</div>
       </div>
       <div className="progress-outer">
         <div

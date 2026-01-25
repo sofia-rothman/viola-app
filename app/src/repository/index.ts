@@ -1,8 +1,9 @@
 import type ITaskRepository from "./interface/ITaskRepository"
+import FirebaseTaskRepository from "./repositories/FirebaseRepository"
 import LocalStorageRepository from "./repositories/LocalStorageRepository"
 
-const useDevMode = true
+const useDevMode = false
 
 export const taskRepository: ITaskRepository = useDevMode
   ? new LocalStorageRepository()
-  : console.log("new SupabaseRepository()")
+  : new FirebaseTaskRepository()
