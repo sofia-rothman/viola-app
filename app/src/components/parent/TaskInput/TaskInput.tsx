@@ -1,6 +1,6 @@
 import { useState } from "react"
 import "./TaskInput.css"
-import useTaskContext from "../../../../context/TaskContext"
+import useTaskContext from "../../../context/TaskContext"
 
 const TaskInput = () => {
   const tasks = useTaskContext()

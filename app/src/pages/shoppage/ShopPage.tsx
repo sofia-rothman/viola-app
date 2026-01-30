@@ -2,8 +2,8 @@ import { useEffect, useState } from "react"
 import useTaskContext from "../../context/TaskContext"
 import { rewards } from "../../data/rewards"
 import "./ShopPage.css"
-import PurchaseRow from "./components/PurchaseRow/PurchaseRow"
-import RewardCard from "./components/RewardCard/RewardCard"
+import RewardCard from "../../components/shared/RewardCard/RewardCard"
+import PurchaseRow from "../../components/shared/PurchaseRow/PurchaseRow"
 
 const ShopPage = () => {
   const taskContext = useTaskContext()

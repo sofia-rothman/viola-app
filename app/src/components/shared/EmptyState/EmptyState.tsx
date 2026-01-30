@@ -1,4 +1,4 @@
-import smiley from "../../assets/funny-emoji.svg"
+import smiley from "./../../../assets/funny-emoji.svg"
 import "./EmptyState.css"
 
 const EmptyState = () => {

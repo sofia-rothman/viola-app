@@ -1,6 +1,6 @@
-import useTaskContext from "../../context/TaskContext"
+import useTaskContext from "../../../context/TaskContext"
 import "./Header.css"
-import CrownIcon from "../../../../app/src/assets/crown.svg?react"
+import CrownIcon from "./../../../assets/crown.svg?react"
 import StatCard from "./components/StatCard/StatCard"
 import ProgressBar from "./components/ProgressBar/ProgressBar"
 

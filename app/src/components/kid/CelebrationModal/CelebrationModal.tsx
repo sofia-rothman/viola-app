@@ -1,7 +1,7 @@
 import confetti from "canvas-confetti"
 import "./CelebrationModal.css"
 import { useEffect } from "react"
-import useTaskContext from "../../context/TaskContext"
+import useTaskContext from "../../../context/TaskContext"
 
 const CelebrationModal = () => {
   const tasks = useTaskContext()

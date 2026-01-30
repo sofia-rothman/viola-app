@@ -1,9 +1,9 @@
-import TaskItem from "../TaskItem/TaskItem"
-import deleteIcon from "../../../../assets/delete-226.svg"
+import deleteIcon from "./../../../assets/delete-226.svg"
 import "./TaskList.css"
-import useTaskContext from "../../../../context/TaskContext"
-import type { Task } from "../../../../types/Task"
-import EmptyState from "../../../../components/EmptyState/EmptyState"
+import useTaskContext from "../../../context/TaskContext"
+import type { Task } from "../../../types/Task"
+import EmptyState from "../EmptyState/EmptyState"
+import TaskItem from "../TaskItem/TaskItem"
 
 const TaskList = () => {
   const taskContext = useTaskContext()

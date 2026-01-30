@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom"
-import useTaskContext from "../../../../context/TaskContext"
 import "./RewardCard.css"
 import { useState } from "react"
-import type { Reward } from "../../../../types/Reward"
+import useTaskContext from "../../../context/TaskContext"
+import type { Reward } from "../../../types/Reward"
 
 interface RewardCardProps {
   item: Reward
