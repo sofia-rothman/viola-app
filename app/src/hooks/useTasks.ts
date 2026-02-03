@@ -11,8 +11,6 @@ export const useTasks = () => {
   const [purchase, setPurchase] = useState<Purchase[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [hasLoaded, setHasLoaded] = useState(false)
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [error, setError] = useState("")
 
   const goal = useRef(20)
   const title = [
@@ -85,8 +83,6 @@ export const useTasks = () => {
   useEffect(() => {
     setIsLoading(true)
     const fetchData = async () => {
-      setError("")
-
       try {
         const [tasks, balance, XPpoints, purchase] = await Promise.all([
           taskRepository.getTasks(),
@@ -102,7 +98,6 @@ export const useTasks = () => {
         setHasLoaded(true)
       } catch (err) {
         console.error("Hämtning misslyckades:", err)
-        setError("Kunde inte hämta din sparade data.")
       } finally {
         setIsLoading(false)
       }
@@ -123,7 +118,6 @@ export const useTasks = () => {
         ])
       } catch (err) {
         console.error("Bakgrundssparande misslyckades:", err)
-        setError("Kunde inte spara ändringar tillfälligt.")
       }
     }
 
