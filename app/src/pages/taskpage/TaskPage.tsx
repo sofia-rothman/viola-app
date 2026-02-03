@@ -2,12 +2,18 @@ import TaskInput from "../../components/parent/TaskInput/TaskInput"
 import TaskList from "../../components/shared/TaskList/TaskList"
 import "./TaskPage.css"
 
-const TaskPage = () => {
+interface TaskPageProps {
+  isParentView: boolean | false
+}
+
+const TaskPage = (props: TaskPageProps) => {
+  const { isParentView } = props
+
   return (
     <div className="container">
-      <TaskInput />
+      {isParentView && <TaskInput />}
       <div className="wrapper">
-        <TaskList />
+        <TaskList isParentView={isParentView} />
       </div>
     </div>
   )

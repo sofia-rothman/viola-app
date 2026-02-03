@@ -18,10 +18,11 @@ interface TaskContextValue {
   totalXP: number
   balance: number
   isLoading: boolean
+  toggleApproved: (taskId: string) => void
 }
 
 export const TaskContext = createContext<TaskContextValue | undefined>(
-  undefined
+  undefined,
 )
 
 export default function useTaskContext() {

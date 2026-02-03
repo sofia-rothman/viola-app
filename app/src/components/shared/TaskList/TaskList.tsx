@@ -5,7 +5,13 @@ import type { Task } from "../../../types/Task"
 import EmptyState from "../EmptyState/EmptyState"
 import TaskItem from "../TaskItem/TaskItem"
 
-const TaskList = () => {
+interface TaskListProps {
+  isParentView: boolean | false
+}
+
+const TaskList = (props: TaskListProps) => {
+  const { isParentView } = props
+
   const taskContext = useTaskContext()
 
   const compareFn = (a: Task, b: Task) => {
@@ -26,7 +32,12 @@ const TaskList = () => {
             key={task.id}
             className={`list-item ${task.completed && "completed"}`}
           >
-            <TaskItem task={task} toggleStatus={taskContext.toggleStatus} />
+            <TaskItem
+              task={task}
+              toggleStatus={taskContext.toggleStatus}
+              isParentView={isParentView}
+              toggleApproved={taskContext.toggleApproved}
+            />
             <div className="button-container">
               <button
                 className="delete-button"

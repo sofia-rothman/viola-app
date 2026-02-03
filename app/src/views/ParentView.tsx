@@ -9,7 +9,7 @@ const ParentView = () => {
     <div>
       <Header />
       <Routes>
-        <Route path="/" element={<TaskPage />} />
+        <Route path="/" element={<TaskPage isParentView={true} />} />
         <Route path="/shop" element={<ShopPage />} />
       </Routes>
       <Navbar />

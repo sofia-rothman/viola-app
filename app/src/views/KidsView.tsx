@@ -8,7 +8,7 @@ const KidsView = () => {
     <div>
       <Header />
       <Routes>
-        <Route path="/" element={<TaskPage />} />
+        <Route path="/" element={<TaskPage isParentView={false} />} />
         <Route path="/shop" element={<ShopPage />} />
       </Routes>
     </div>

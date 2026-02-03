@@ -72,6 +72,14 @@ export const useTasks = () => {
     )
   }
 
+  const toggleApproved = (taskId: string) => {
+    setTasks((prev) =>
+      prev.map((p) =>
+        p.id === taskId ? { ...p, isApproved: !p.isApproved } : p,
+      ),
+    )
+  }
+
   const purchaseItem = (item: Reward) => {
     if (item.price > balance) {
       return false
@@ -146,5 +154,6 @@ export const useTasks = () => {
     purchase,
     totalXP,
     isLoading,
+    toggleApproved,
   }
 }
