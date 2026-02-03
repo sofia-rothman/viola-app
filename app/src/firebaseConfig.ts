@@ -9,7 +9,7 @@ import { getDatabase } from "firebase/database"
 const firebaseConfig = {
   databaseURL:
     "https://viola-task-manager-default-rtdb.europe-west1.firebasedatabase.app",
-  apiKey: "AIzaSyAzvnqHq89ZPptqK-78ah5BiUcaBtIEt5Y",
+  apiKey: import.meta.env.FIREBASE_API_KEY,
   authDomain: "viola-task-manager.firebaseapp.com",
   projectId: "viola-task-manager",
   storageBucket: "viola-task-manager.firebasestorage.app",

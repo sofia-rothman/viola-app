@@ -6,7 +6,6 @@ import ShopPage from "./pages/ShopPage/ShopPage"
 import Navbar from "./components/Navbar/Navbar"
 import useTaskContext from "./context/TaskContext"
 import TaskPage from "./pages/TaskPage/TaskPage"
-import DashboardPage from "./pages/DashboardPage"
 
 function App() {
   const tasks = useTaskContext()
@@ -15,11 +14,11 @@ function App() {
   return (
     <div>
       {isGoalReached && <CelebrationModal />}
-      {/*  <Header /> */}
+      <Header />
       <Routes>
-        <Route path="/" element={<DashboardPage />} />
-        {/*  <Route path="/" element={<TaskPage />} />
-        <Route path="/shop" element={<ShopPage />} /> */}
+        {/* <Route path="/" element={<DashboardPage />} /> */}
+        <Route path="/" element={<TaskPage />} />
+        <Route path="/shop" element={<ShopPage />} />
       </Routes>
       <Navbar />
     </div>

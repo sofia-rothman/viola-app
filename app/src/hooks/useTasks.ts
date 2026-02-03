@@ -11,6 +11,7 @@ export const useTasks = () => {
   const [purchase, setPurchase] = useState<Purchase[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [hasLoaded, setHasLoaded] = useState(false)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [error, setError] = useState("")
 
   const goal = useRef(20)
