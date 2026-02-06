@@ -4,9 +4,9 @@ import "./TaskPage.css"
 
 const TaskPage = () => {
   return (
-    <div className="container">
+    <div className="task-page-container">
       <TaskInput />
-      <div className="wrapper">
+      <div className="task-list-wrapper">
         <TaskList />
       </div>
     </div>

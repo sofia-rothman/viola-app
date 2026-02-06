@@ -1,6 +1,7 @@
-.container {
-  display: grid;
-  justify-content: center;
+.task-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: 1rem;
   padding-bottom: 5rem;
 }

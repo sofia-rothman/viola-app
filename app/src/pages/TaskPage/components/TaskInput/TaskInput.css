@@ -1,20 +1,39 @@
 .input-container {
-  margin: 0 auto;
+  margin-top: -3rem;
+  margin-bottom: 4rem;
+  padding: 8px 8px 8px 24px;
   display: grid;
+  background-color: white;
   grid-template-columns: 2fr 1fr;
   justify-content: space-between;
   width: 90%;
+  border-radius: 50px;
+  border:none;
+  box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.5);
+  min-height: 5rem;
+}
+
+.input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 1.5rem;
 }
 
 .button-wrapper {
-padding-left: 1rem;
+  padding-right: 1rem;
+  justify-content: end;
+  align-items: center;
+  display: flex;
 }
 
 .add-button {
-  color: #f83a85; 
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background-color: var( --primary-pink); 
+  color: var(--color-text-light);
   padding: 12px 28px;
   font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
 }
 
 .add-button:hover {
