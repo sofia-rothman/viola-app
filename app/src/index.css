@@ -8,7 +8,8 @@
   --card-bg-completed: rgba(255, 255, 255, 0.5);
   --text-dark: #2d3436;
 
-  --primary-pink: #ff4d6d;
+  --primary-pink: #F43E6A;
+  --secondary-pink: #D42A55;
   --bg-gradient: linear-gradient(135deg, #ff4d6d 0%, #c73d5a 100%);
   --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
   --border-radius-lg: 50px;

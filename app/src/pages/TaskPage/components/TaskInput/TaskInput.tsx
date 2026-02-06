@@ -18,6 +18,7 @@ const TaskInput = () => {
         value={title}
         name="title"
         onChange={(e) => setTitle(e.target.value)}
+        placeholder="Vad vill du fixa idag?"
       ></input>
       <div className="button-wrapper">
         <button
@@ -25,7 +26,7 @@ const TaskInput = () => {
           type="submit"
           onClick={() => handleClick()}
         >
-          Lägg till
+          Lägg till +
         </button>
       </div>
     </div>
