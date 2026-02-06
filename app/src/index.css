@@ -8,6 +8,12 @@
   --card-bg-completed: rgba(255, 255, 255, 0.5);
   --text-dark: #2d3436;
 
+  --primary-pink: #ff4d6d;
+  --bg-gradient: linear-gradient(135deg, #ff4d6d 0%, #c73d5a 100%);
+  --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  --border-radius-lg: 50px;
+  --border-radius-sm: 15px;
+
   --color-accent: rgb(243, 224, 130);        
   --color-delete: rgb(255, 139, 148);        
   --color-delete-hover: rgb(235, 119, 128);
@@ -66,7 +72,7 @@ button {
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 4px auto black;
 }
 button:active{
   transform: translateY(2px)
