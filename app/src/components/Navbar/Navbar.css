@@ -27,8 +27,27 @@
   padding: 5px 0;
 }
 
+.task-icon svg,
+.shop-icon svg {
+  height: 2.5rem; 
+  width: 2.5rem;
+  fill: #b2bec3; 
+  transition: fill 0.3s ease, transform 0.3s ease;
+}
+
+.task-icon svg,
+.shopping-icon svg {
+  fill: #f83a85; 
+  transform: translateY(-2px);
+}
+
+.task-icon:active svg, 
+.shopping-icon:active svg {
+  color: unset; 
+}
+
 .nav-item.active {
-  color: #f83a85; 
+  color: #f83a85;
 }
 
 .nav-item.active::after {
@@ -52,15 +71,4 @@
     transform: scale(1) translateY(0); 
     opacity: 1; 
   }
-}
-
-.nav-item:active .nav-icon {
-  transform: translateY(-4px);
-  color: #f83a85;
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.nav-icon {
-  font-size: 1.5rem;
-  margin-bottom: 4px;
 }
