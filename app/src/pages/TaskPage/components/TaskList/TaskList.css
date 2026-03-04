@@ -2,17 +2,18 @@
   padding: 1rem;
   display: grid;
   row-gap: 1rem;
-  width: 90%;
-  max-width: 600px;
-  margin: 0 auto;
+  width: 100%;
 }
 
 .list-item {
+  width: stretch;
+  display: flex;
+  justify-content: center;
   background: var(--card-bg);
   color: var(--text-dark);
   border-radius: 20px;
   margin-bottom: 12px;
-  padding: 16px;
+  padding: 0.5em;
   display: flex;
   align-items: center;
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -52,4 +53,13 @@
   width: 1.5rem; 
   height: 1.5rem;
   filter: invert(40%) sepia(10%) saturate(2000%) hue-rotate(320deg) brightness(90%) contrast(90%);
+}
+
+/* MEDIA QUERIES */
+
+/* iPad & Laptop */
+@media (min-width: 768px) {
+  .list {
+    width: 90%; 
+  }
 }

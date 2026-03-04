@@ -5,3 +5,9 @@
   margin: 1rem;
   padding-bottom: 5rem;
 }
+
+.task-list-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
