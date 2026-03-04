@@ -31,12 +31,15 @@
   background-color: var( --primary-pink); 
   color: var(--color-text-light);
   padding: 12px 28px;
-  font-size: 1rem;
+  width: 50%;
+  height: 100%;
+  font-size: 1.5em;
   cursor: pointer;
   box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
 }
 
 .add-button:hover {
   transform: translateY(-2px);
+  background-color: var(--secondary-pink);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
