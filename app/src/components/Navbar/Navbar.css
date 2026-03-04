@@ -1,23 +1,37 @@
 .navbar {
-  position: fixed;
+position: fixed;
   bottom: 0;
-  left: 0;
+left: 0;
   right: 0;
-  background: white;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 100%; 
   height: 85px;
+  background: white;
   display: flex;
   justify-content: space-around;
-  align-items: center;
-  padding-bottom: 15px; 
+  align-items: center; 
   border-radius: 30px 30px 0 0;
   box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.08);
-  z-index: 1000;
+  z-index: 9999;
+  padding-bottom: env(safe-area-inset-bottom, 20px);
+  box-sizing: border-box; 
+}
+
+/* tablet & laptop */
+@media (min-width: 768px) {
+  .navbar {
+    max-width: 800px;
+  }
 }
 
 .nav-item {
  display: flex;
+ flex: 1;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-decoration: none;
   color: #b2bec3; 
   font-size: 0.8rem;
@@ -35,21 +49,18 @@
   transition: fill 0.3s ease, transform 0.3s ease;
 }
 
-.task-icon svg,
-.shopping-icon svg {
-  fill: #f83a85; 
-  transform: translateY(-2px);
-}
-
+  
 .task-icon:active svg, 
-.shopping-icon:active svg {
+.shop-icon:active svg {
   color: unset; 
-}
+  transform: translateY(-2px);
+} 
 
 .nav-item.active {
   color: #f83a85;
 }
 
+/* pink dot */
 .nav-item.active::after {
   content: '';
   position: absolute;
