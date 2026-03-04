@@ -25,7 +25,7 @@
 }
 
 .status-button.completed {
-  background: #dfe6e9; /* Grå/neutral för att visa att den är 'löst' */
+  background: #dfe6e9; 
   color: #636e72;
   border: 2px solid transparent;
 }

@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-/* 1. VARIABLER & DESIGN TOKENS */
 :root {
   /* Colors */
   --color-primary: #f83a85;
@@ -10,13 +9,16 @@
   --color-accent: rgb(243, 224, 130);
   --color-delete: rgb(255, 139, 148);
   --color-delete-hover: rgb(235, 119, 128);
-  
-  --color-text-light: #eeeeee;
-  --color-text-dark: #2d3436;
 
-  /* Button colora */
+  
+  /* Button colors */
   --primary-pink: #F43E6A;
   --secondary-pink: #D42A55;
+  
+  /* font colors */
+  --color-text-light: rgb(238, 238, 238);
+  --color-text-light: #eeeeee;
+  --color-text-dark: #2d3436;
 
   /* Card & UI */
   --card-bg: rgba(255, 255, 255, 0.9);
@@ -26,31 +28,24 @@
   /* Border Radius */
   --br-lg: 50px;
   --br-sm: 15px;
-
-  /* Layout */
   --app-max-width: 600px;
 }
 
-/* 2. RESET & BASE (Fönster-inställningar) */
 html, body {
   margin: 0;
   padding: 0;
-  height: 100vh; /* Använd 100% istället för 100vh för bättre mobil-kompabilitet */
+  height: 100vh; 
   width: 100vw;
-  overflow: hidden; /* Förhindrar att hela sidan scrollar */
+  overflow: hidden; 
+  overflow-y: auto;
   font-family: 'Inter', sans-serif;
-  color: white;
-}
-
-body {
+  color: var(--color-text-dark);
   background: var(--primary-gradient);
   background-attachment: fixed;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
 }
 
-/* 3. TYPOGRAFI */
 h1, h2, h3 {
   margin: 0;
   line-height: 1.1;
@@ -60,30 +55,26 @@ h1 { font-size: 3.2em; }
 h2 { font-size: 2.2em; font-weight: 600; }
 h3 { font-size: 1.6em; font-weight: 300; }
 
-/* 4. APP WRAPPER (Själva scroll-ytan) */
 .app-wrapper {
-  flex: 1; /* Tar upp allt utrymme ovanför navbaren */
-  overflow-y: auto; /* Här sker all scroll */
+  flex: 1; 
   overflow-x: hidden;
-  -webkit-overflow-scrolling: touch; /* Mjuk scroll för iOS */
-  
+  -webkit-overflow-scrolling: touch; 
   width: 100%;
   max-width: 100%;
   margin: 0 auto;
-  padding-bottom: 110px; /* Ger plats så att navbaren inte täcker sista kortet */
+  padding-bottom: 110px; 
   box-sizing: border-box;
 }
 
-/* Desktop-justering */
+/* Desktop */
 @media (min-width: 768px) {
   .app-wrapper {
     max-width: var(--app-max-width);
-    /* Valfritt: Om du vill att appen ska kännas mer som en "enhet" på desktop */
-    /* background: rgba(0,0,0,0.03); */
+    background: rgba(0,0,0,0.03); 
   }
 }
 
-/* 5. KOMPONENTER (Buttons) */
+/* Components */
 button {
   background: white;
   border-radius: var(--br-lg);
