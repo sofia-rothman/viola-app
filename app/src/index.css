@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 :root {
   /* Colors */
   --color-primary: #f83a85;
@@ -28,7 +32,9 @@
   /* Border Radius */
   --br-lg: 50px;
   --br-sm: 15px;
-  --app-max-width: 600px;
+
+  /* limits */
+  --app-max-width: 800px;
 }
 
 html, body {
@@ -44,6 +50,7 @@ html, body {
   background-attachment: fixed;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 
 h1, h2, h3 {
@@ -60,7 +67,6 @@ h3 { font-size: 1.6em; font-weight: 300; }
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch; 
   width: 100%;
-  max-width: 100%;
   margin: 0 auto;
   padding-bottom: 110px; 
   box-sizing: border-box;
