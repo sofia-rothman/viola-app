@@ -12,7 +12,8 @@ function App() {
   const isGoalReached = tasks.points >= tasks.goal.current
 
   return (
-    <div>
+    <>
+    <div className="app-wrapper">
       {isGoalReached && <CelebrationModal />}
       <Header />
       <Routes>
@@ -20,8 +21,9 @@ function App() {
         <Route path="/" element={<TaskPage />} />
         <Route path="/shop" element={<ShopPage />} />
       </Routes>
-      <Navbar />
     </div>
+      <Navbar />
+    </>
   )
 }
 

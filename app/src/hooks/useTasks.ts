@@ -3,6 +3,7 @@ import { createTask, type Task } from "../types/Task"
 import { type Reward } from "../types/Reward"
 import { createPurchase, type Purchase } from "../types/Purchase"
 import { taskRepository } from "../repository"
+import { calculateLevel, calculatePoints } from "../utils/taskHelpers"
 
 export const useTasks = () => {
   const [tasks, setTasks] = useState<Task[]>([])
@@ -13,29 +14,43 @@ export const useTasks = () => {
   const [hasLoaded, setHasLoaded] = useState(false)
 
   const goal = useRef(20)
-  const title = [
-    "Sysselsafari",
-    "Junior-fixare",
-    "Hemmets Hjälte",
-    "Ordningsexpert",
-    "Guldstjärne-mästare",
-    "Legendarisk Fixar-drottning",
-  ]
+  const RANK_TITLES: string[] = [
+    "Dammråtte-tämjare",           // Level 1 (Index 0)
+    "Pryl-pionjär",               // Level 2
+    "Småfixar-smurfen",           // Level 3
+    "Kaos-kontrollant",           // Level 4
+    "Städ-lärling",               // Level 5
+    "Slipp-stök-strateg",          // Level 6
+    "Proffs-putsare",             // Level 7
+    "Städ-ninja",                 // Level 8
+    "Hemmets Högra Hand",         // Level 9
+    "Fixar-fantom",               // Level 10
+    "Fixar-drottning",            // Level 11
+    "Ordningens Väktare",         // Level 12
+    "Struktur-stjärna",           // Level 13
+    "Glans-general",              // Level 14
+    "Hushållets Hjärta",          // Level 15
+    "Magisk Miljö-skapare",       // Level 16
+    "Ordningens Överstepräst",     // Level 17
+    "Guldputs-guvernör",          // Level 18
+    "Fixar-fenomen",              // Level 19
+    "Suverän Syssle-specialist",   // Level 20
+    "Universums Fixar-fyrstinna",  // Level 21
+    "Intergalaktisk Ordningsexpert",// Level 22 
+    "Odödlig Fixar-legend 🏆"      // Level 23+ (index 22)
+  ];
 
   const getPoints = () => {
-    if (tasks && tasks.length > 0) {
-      const completedTasks = tasks.filter((task) => task.completed)
-      return completedTasks.length * 10
-    } else return 0
+    return calculatePoints(tasks)
   }
 
   const getLevel = () => {
-    return totalXP / goal.current
+    return calculateLevel(totalXP, goal.current)
   }
 
   const getTitle = () => {
     const index = Math.floor(getLevel())
-    return index < 6 ? title[index] : title[title.length - 1]
+    return index < 22 ? RANK_TITLES[index] : RANK_TITLES[RANK_TITLES.length - 1]
   }
 
   const addTask = (title: string) => {

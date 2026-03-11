@@ -1,13 +1,3 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.container {
-/*   justify-content: center;
-  margin: 1rem; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  width: 100%;
 }

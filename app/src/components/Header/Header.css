@@ -16,6 +16,8 @@
 }
 
 .name {
+  display: flex;
+  justify-content: center;
   margin: 1%;
 }
 
@@ -27,6 +29,8 @@
 }
 
 .level {
+  display: flex;
+  justify-content: center;
   font-weight: 100;
   font-size: 25px;
   color: rgb(231 228 228 / 79%);

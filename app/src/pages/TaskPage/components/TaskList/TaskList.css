@@ -1,18 +1,17 @@
 .list {
-  padding: 1rem;
-  display: grid;
-  row-gap: 1rem;
-  width: 90%;
-  max-width: 600px;
-  margin: 0 auto;
+  display: block;
+  width: 100%;
 }
 
 .list-item {
+  width: stretch;
+  display: flex;
+  justify-content: center;
   background: var(--card-bg);
   color: var(--text-dark);
   border-radius: 20px;
   margin-bottom: 12px;
-  padding: 16px;
+  padding: 0.5em;
   display: flex;
   align-items: center;
   border: 1px solid rgba(255, 255, 255, 0.3);
