@@ -31,7 +31,7 @@ export const TaskProvider = (props: TaskProviderProps) => {
     deleteTask: deleteTask,
     points: points,
     clearTasks: clearTasks,
-    title: title,
+    title: title || 'Titel', 
     level: level,
     goal: goal,
     purchaseItem: purchaseItem,

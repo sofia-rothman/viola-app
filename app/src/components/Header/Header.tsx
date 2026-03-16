@@ -3,12 +3,18 @@ import "./Header.css"
 import CrownIcon from "../../../../app/src/assets/crown.svg?react"
 import StatCard from "./components/StatCard/StatCard"
 import ProgressBar from "./components/ProgressBar/ProgressBar"
+import { useAuth } from "../../hooks/useAuth"
+import UserMenu from "../UserMenu/UserMenu"
 
 const Header = () => {
   const tasks = useTaskContext()
+  const { user } = useAuth();
 
   return (
     <div className="header">
+      <UserMenu/>
+      
+      {user && 
       <div className="user-stats-card">
         <h2 className="name">
           Bonnie <CrownIcon />
@@ -32,6 +38,7 @@ const Header = () => {
           </div>
         </div>
       </div>
+      }
     </div>
   )
 }

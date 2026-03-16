@@ -1,76 +1,75 @@
 import { ref, get, set } from "firebase/database"
-import { db } from "./../../firebaseConfig"
+import { db } from "./../../firebaseConfig" 
 import type ITaskRepository from "../interface/ITaskRepository"
 import type { Task } from "../../types/Task"
 import type { Purchase } from "../../types/Purchase"
 
 export default class FirebaseTaskRepository implements ITaskRepository {
-  async getTasks(): Promise<Task[] | null> {
-    const dbRef = ref(db, "tasks")
-    const snapshot = await get(dbRef)
-    if (snapshot.exists()) {
-      return snapshot.val()
+  private getUserRef(path: string, userId: string) {
+    return ref(db, `users/${userId}/${path}`);
+  }
+
+  async getTasks(userId: string): Promise<Task[] | null> {
+    try {
+      const dbRef = this.getUserRef("tasks", userId);
+      const snapshot = await get(dbRef);
+      return snapshot.exists() ? snapshot.val() : [];
+    } catch (error) {
+      console.error("Kunde inte hämta tasks:", error);
+      return [];
     }
-    return []
   }
 
-  async saveTasks(tasks: Task[]): Promise<void> {
-    const dbRef = ref(db, "tasks")
-    await set(dbRef, tasks)
+  async saveTasks(tasks: Task[], userId: string): Promise<void> {
+    const dbRef = this.getUserRef("tasks", userId);
+    await set(dbRef, tasks);
   }
 
-  async getBalance(): Promise<number | null> {
-    const dbRef = ref(db, "balance")
-    const snapshot = await get(dbRef)
+  async getBalance(userId: string): Promise<number | null> {
+    const dbRef = this.getUserRef("balance", userId);
+    const snapshot = await get(dbRef);
+    return snapshot.exists() ? snapshot.val() : 0;
+  }
+
+  async saveBalance(balance: number, userId: string): Promise<void> {
+    const dbRef = this.getUserRef("balance", userId);
+    await set(dbRef, balance);
+  }
+
+  async getXPpoints(userId: string): Promise<number | null> {
+    const dbRef = this.getUserRef("XPpoints", userId);
+    const snapshot = await get(dbRef);
+    return snapshot.exists() ? snapshot.val() : 0;
+  }
+
+  async saveXPpoints(XPpoints: number, userId: string): Promise<void> {
+    const dbRef = this.getUserRef("XPpoints", userId);
+    await set(dbRef, XPpoints);
+  }
+
+  async getPurchase(userId: string): Promise<Purchase[] | null> {
+    const dbRef = this.getUserRef("purchase", userId);
+    const snapshot = await get(dbRef);
 
     if (snapshot.exists()) {
-      return snapshot.val()
-    }
-    return 0
-  }
-
-  async saveBalance(balance: number): Promise<void> {
-    const dbRef = ref(db, "balance")
-    await set(dbRef, balance)
-  }
-
-  async getXPpoints(): Promise<number | null> {
-    const dbRef = ref(db, "XPpoints")
-    const snapshot = await get(dbRef)
-
-    if (snapshot.exists()) {
-      return snapshot.val()
-    }
-    return 0
-  }
-
-  async saveXPpoints(XPpoints: number): Promise<void> {
-    const dbRef = ref(db, "XPpoints")
-    await set(dbRef, XPpoints)
-  }
-
-  async getPurchase(): Promise<Purchase[] | null> {
-    const dbRef = ref(db, "purchase")
-    const snapshot = await get(dbRef)
-
-    if (snapshot.exists()) {
-      return snapshot.val().map((m: Purchase) => ({
+      const data = snapshot.val();
+      const purchaseArray = Array.isArray(data) ? data : Object.values(data);
+      
+      return purchaseArray.map((m: any) => ({
         ...m,
         dateOfPurchase: new Date(m.dateOfPurchase),
-      }))
+      }));
     }
-    return []
+    return [];
   }
 
-  async savePurchase(purchase: Purchase[]): Promise<void> {
-    const purchases: Array<object> = []
-    purchase.map((m) => {
-      purchases.push({
-        ...m,
-        dateOfPurchase: m.dateOfPurchase.toISOString(),
-      })
-    })
-    const dbRef = ref(db, "purchase")
-    await set(dbRef, purchases)
+  async savePurchase(purchase: Purchase[], userId: string): Promise<void> {
+    const purchases = purchase.map((m) => ({
+      ...m,
+      dateOfPurchase: m.dateOfPurchase.toISOString(),
+    }));
+    
+    const dbRef = this.getUserRef("purchase", userId);
+    await set(dbRef, purchases);
   }
 }

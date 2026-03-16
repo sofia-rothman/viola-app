@@ -4,8 +4,10 @@ import { rewards } from "../../data/rewards"
 import "./ShopPage.css"
 import PurchaseRow from "./components/PurchaseRow/PurchaseRow"
 import RewardCard from "./components/RewardCard/RewardCard"
+import { useAuth } from "../../hooks/useAuth"
 
 const ShopPage = () => {
+  const { user } = useAuth()
   const taskContext = useTaskContext()
   const [displayBalance, setDisplayBalance] = useState(taskContext.balance)
 
@@ -26,7 +28,8 @@ const ShopPage = () => {
     return () => clearInterval(timer)
   }, [taskContext.balance])
 
-  return (
+  
+    if(user) return (
     <div className="shop-container">
       Du har {displayBalance} ⭐️ att handla för
       <div className="shop-grid">
