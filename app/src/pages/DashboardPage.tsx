@@ -1,9 +1,9 @@
-import { useState } from "react"
-import ParentView from "../views/ParentView"
-import KidsView from "../views/KidsView"
+//import { useState } from "react"
+/* import ParentView from "../views/ParentView"
+import KidsView from "../views/KidsView" */
 
 const DashboardPage = () => {
-  const [userRole, setUserRole] = useState<"parent" | "kid">("kid")
+ // const [userRole, setUserRole] = useState<"parent" | "kid">("kid")
 
   return (
     <div>

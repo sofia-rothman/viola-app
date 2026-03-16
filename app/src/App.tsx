@@ -6,7 +6,7 @@ import ShopPage from "./pages/ShopPage/ShopPage"
 import Navbar from "./components/Navbar/Navbar"
 import useTaskContext from "./context/TaskContext"
 import TaskPage from "./pages/TaskPage/TaskPage"
-import DashboardPage from "./pages/DashboardPage"
+//import DashboardPage from "./pages/DashboardPage"
 import { useAuth } from "./hooks/useAuth"
 
 function App() {
