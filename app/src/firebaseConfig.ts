@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { getApp, getApps, initializeApp } from "firebase/app"
+import { getAuth, GoogleAuthProvider } from "firebase/auth"
 import { getDatabase } from "firebase/database"
 
 // Your web app's Firebase configuration
@@ -7,7 +8,7 @@ import { getDatabase } from "firebase/database"
 const firebaseConfig = {
   databaseURL:
     "https://viola-task-manager-default-rtdb.europe-west1.firebasedatabase.app",
-  apiKey: import.meta.env.FIREBASE_API_KEY,
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "viola-task-manager.firebaseapp.com",
   projectId: "viola-task-manager",
   storageBucket: "viola-task-manager.firebasestorage.app",
@@ -19,3 +20,5 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig)
 export const db = getDatabase(app)
+export const auth = getAuth(app) // Exportera auth
+export const googleProvider = new GoogleAuthProvider() // Skapa en provider

@@ -7,13 +7,14 @@ const DashboardPage = () => {
 
   return (
     <div>
-      <button
+      
+      {/* <button
         onClick={() => setUserRole(userRole === "kid" ? "parent" : "kid")}
       >
         Växla till {userRole === "kid" ? "Förälder" : "Barn"}
       </button>
 
-      {userRole === "parent" ? <ParentView /> : <KidsView />}
+      {userRole === "parent" ? <ParentView /> : <KidsView />} */}
     </div>
   )
 }
