@@ -2,9 +2,11 @@ import { useState } from "react"
 import { useAuth } from "../../hooks/useAuth"
 import { loginWithGoogle, logout } from "../../services/authService"
 import './UserMenu.css'
+import { useAccount } from "../../hooks/useAccount"
 
 const UserMenu = () => {
-    const { user } = useAuth()
+  const { user } = useAuth()
+  const { account } = useAccount({user})
   const [error, setError] = useState<string | null>(null)
 
   const handleLogin = async () => {

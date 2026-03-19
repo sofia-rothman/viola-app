@@ -1,7 +1,10 @@
+import type { Account } from "../../types/Account"
 import type { Purchase } from "../../types/Purchase"
 import type { Task } from "../../types/Task"
 
 export default interface ITaskRepository {
+  storeUser(account: Account, userId: string): void
+  getUser(userId: string): Promise<Account | null>
   getTasks(userId: string): Promise<Task[] | null>
   saveTasks(tasks: Task[], userId: string): Promise<void>
   getBalance(userId: string): Promise<number | null>

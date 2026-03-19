@@ -14,33 +14,33 @@ export const useTasks = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [hasLoaded, setHasLoaded] = useState(false)
   const { user, loading: authLoading } = useAuth()
-  
+
 
   const goal = useRef(20)
   const RANK_TITLES: string[] = [
-    "Dammråtte-tämjare",          
-    "Pryl-pionjär",             
-    "Småfixar-smurfen",         
-    "Kaos-kontrollant",         
-    "Städ-lärling",             
-    "Slipp-stök-strateg",        
-    "Proffs-putsare",           
-    "Städ-ninja",               
-    "Hemmets Högra Hand",       
-    "Fixar-fantom",              
-    "Fixar-drottning",           
-    "Ordningens Väktare",        
-    "Struktur-stjärna",          
-    "Glans-general",             
-    "Hushållets Hjärta",         
-    "Magisk Miljö-skapare",      
-    "Ordningens Överstepräst",    
-    "Guldputs-guvernör",         
-    "Fixar-fenomen",             
-    "Suverän Syssle-specialist",  
-    "Universums Fixar-fyrstinna", 
+    "Dammråtte-tämjare",
+    "Pryl-pionjär",
+    "Småfixar-smurfen",
+    "Kaos-kontrollant",
+    "Städ-lärling",
+    "Slipp-stök-strateg",
+    "Proffs-putsare",
+    "Städ-ninja",
+    "Hemmets Högra Hand",
+    "Fixar-fantom",
+    "Fixar-drottning",
+    "Ordningens Väktare",
+    "Struktur-stjärna",
+    "Glans-general",
+    "Hushållets Hjärta",
+    "Magisk Miljö-skapare",
+    "Ordningens Överstepräst",
+    "Guldputs-guvernör",
+    "Fixar-fenomen",
+    "Suverän Syssle-specialist",
+    "Universums Fixar-fyrstinna",
     "Intergalaktisk Ordningsexpert",
-    "Odödlig Fixar-legend 🏆"     
+    "Odödlig Fixar-legend 🏆"
   ];
 
   const getPoints = () => {
@@ -50,10 +50,10 @@ export const useTasks = () => {
   const getLevel = () => {
     return calculateLevel(totalXP, goal.current)
   }
-  
+
   const getTitle = () => {
     const index = Math.floor(getLevel())
-    if(index < 0) return
+    if (index < 0) return
     return index < 22 ? RANK_TITLES[index] : RANK_TITLES[RANK_TITLES.length - 1]
   }
 
@@ -100,7 +100,7 @@ export const useTasks = () => {
   }
 
   useEffect(() => {
-    if(user) {
+    if (user) {
       setIsLoading(true)
       const fetchData = async () => {
         try {
@@ -110,7 +110,7 @@ export const useTasks = () => {
             taskRepository.getXPpoints(user.uid),
             taskRepository.getPurchase(user.uid),
           ])
-  
+
           setTasks(tasks || [])
           setBalance(balance || 0)
           setTotalXP(XPpoints || 0)
@@ -131,16 +131,16 @@ export const useTasks = () => {
 
     const saveData = async () => {
       if (user)
-      try {
-        await Promise.all([
-          taskRepository.saveTasks(tasks, user?.uid),
-          taskRepository.saveBalance(balance, user?.uid),
-          taskRepository.saveXPpoints(totalXP, user?.uid),
-          taskRepository.savePurchase(purchase, user?.uid),
-        ])
-      } catch (err) {
-        console.error("Bakgrundssparande misslyckades:", err)
-      }
+        try {
+          await Promise.all([
+            taskRepository.saveTasks(tasks, user?.uid),
+            taskRepository.saveBalance(balance, user?.uid),
+            taskRepository.saveXPpoints(totalXP, user?.uid),
+            taskRepository.savePurchase(purchase, user?.uid),
+          ])
+        } catch (err) {
+          console.error("Bakgrundssparande misslyckades:", err)
+        }
     }
 
     saveData()
