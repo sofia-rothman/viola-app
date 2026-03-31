@@ -1,13 +1,15 @@
 import { useState } from "react"
-import { useAuth } from "../../hooks/useAuth"
 import { loginWithGoogle, logout } from "../../services/authService"
 import './UserMenu.css'
-import { useAccount } from "../../hooks/useAccount"
+import useAccountContext from "../../context/AccountContext"
+import useAuthContext from "../../context/AuthContext"
 
 const UserMenu = () => {
-  const { user } = useAuth()
-  const { account } = useAccount({user})
+  const { user, loading: isLoading } = useAuthContext()
+  const { saveAccount, loading } = useAccountContext()
   const [error, setError] = useState<string | null>(null)
+
+  if (loading) return <div className="loader">Hämtar profil...</div>;
 
   const handleLogin = async () => {
     setError(null)

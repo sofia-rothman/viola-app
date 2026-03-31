@@ -4,8 +4,8 @@ import { type Reward } from "../types/Reward"
 import { createPurchase, type Purchase } from "../types/Purchase"
 import { taskRepository } from "../repository"
 import { calculateLevel, calculatePoints } from "../utils/taskHelpers"
-import { useAuth } from "./useAuth"
 import { RANK_TITLES } from "../utils/rankTitles"
+import useAuthContext from "../context/AuthContext"
 
 export const useTasks = () => {
   const [tasks, setTasks] = useState<Task[]>([])
@@ -14,7 +14,7 @@ export const useTasks = () => {
   const [purchase, setPurchase] = useState<Purchase[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [hasLoaded, setHasLoaded] = useState(false)
-  const { user, loading: authLoading } = useAuth()
+  const { user, loading: isLoadingAuth } = useAuthContext()
 
   const goal = useRef(20)
 
@@ -117,15 +117,15 @@ export const useTasks = () => {
       }
       fetchData()
     }
-  }, [user, authLoading])
+  }, [user, isLoadingAuth, hasLoaded])
 
    useEffect(() => {
-    if (isLoading || !hasLoaded) return
+    if (isLoading || !hasLoaded || isLoadingAuth) return
 
     const saveData = async () => {
       if (user)
         try {
-          await taskRepository.storeTasks(tasks, user?.uid)
+          await taskRepository.storeTasks(tasks)
           await taskRepository.storeBalance(balance, user?.uid)
           await taskRepository.storeXPpoints(totalXP, user?.uid)
           await taskRepository.storePurchase(purchase, user?.uid)

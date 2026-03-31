@@ -48,7 +48,7 @@ export default class FirebaseRepository implements IRepository {
     }
   }
 
-  async storeTasks(tasks: Task[], userId: string): Promise<void> {
+  async storeTasks(tasks: Task[]): Promise<void> {
     const batch = writeBatch(db);
 
     tasks.map((task) => {

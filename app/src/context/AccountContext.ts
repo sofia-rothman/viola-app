@@ -1,16 +1,22 @@
 import { createContext, useContext } from "react"
 import type { Account } from "../types/Account"
 
-export const AccountContext = createContext<Account | undefined>(
+interface AccountContextValue {
+  account: Account | null
+  saveAccount: () => void
+  loading: boolean
+}
+
+export const AccountContext = createContext<AccountContextValue | undefined>(
   undefined
 )
 
 export default function useAccountContext() {
-  const account = useContext(AccountContext)
+  const context = useContext(AccountContext)
 
-  if (account === undefined) {
-    throw new Error("useAccountContext must be used with AccountContext")
+  if (context === undefined) {
+    throw new Error("useAccountContext must be used within an AccountProvider")
   }
 
-  return account
+  return context
 }

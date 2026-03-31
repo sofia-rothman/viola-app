@@ -6,7 +6,7 @@ export default interface IRepository {
   storeUser(accountInfo: Account, userId: string): Promise<void>
   fetchUser(userId: string): Promise<Account | null>
   fetchTasks(userId: string): Promise<Task[] | null>
-  storeTasks(tasks: Task[], userId: string): Promise<void>
+  storeTasks(tasks: Task[]): Promise<void>
   fetchBalance(userId: string): Promise<number | null>
   storeBalance(balance: number, userId: string): Promise<void>
   fetchXPpoints(userId: string): Promise<number | null>

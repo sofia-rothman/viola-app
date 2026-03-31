@@ -5,13 +5,13 @@ import type { User } from "firebase/auth";
 
 interface useAccountProps {
 	user: User | null
+	isLoadingAuth: boolean
 }
 
 export const useAccount = (props: useAccountProps) => {
-	const { user } = props
+	const { user, isLoadingAuth } = props	
 	const [account, setAccount] = useState<Account | null>(null)
 	const [loading, setLoading] = useState(false)
-
 
 	const saveAccount = () => {
 		user?.uid &&
@@ -19,7 +19,7 @@ export const useAccount = (props: useAccountProps) => {
 	}
 
 	useEffect(() => {
-		if (user) {
+		if (user && !isLoadingAuth) {
 			setLoading(true)
 
 			const getAccountFromDatabase = async () => {
