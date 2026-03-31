@@ -5,6 +5,7 @@ import { createPurchase, type Purchase } from "../types/Purchase"
 import { taskRepository } from "../repository"
 import { calculateLevel, calculatePoints } from "../utils/taskHelpers"
 import { useAuth } from "./useAuth"
+import { RANK_TITLES } from "../utils/rankTitles"
 
 export const useTasks = () => {
   const [tasks, setTasks] = useState<Task[]>([])
@@ -15,33 +16,7 @@ export const useTasks = () => {
   const [hasLoaded, setHasLoaded] = useState(false)
   const { user, loading: authLoading } = useAuth()
 
-
   const goal = useRef(20)
-  const RANK_TITLES: string[] = [
-    "Dammråtte-tämjare",
-    "Pryl-pionjär",
-    "Småfixar-smurfen",
-    "Kaos-kontrollant",
-    "Städ-lärling",
-    "Slipp-stök-strateg",
-    "Proffs-putsare",
-    "Städ-ninja",
-    "Hemmets Högra Hand",
-    "Fixar-fantom",
-    "Fixar-drottning",
-    "Ordningens Väktare",
-    "Struktur-stjärna",
-    "Glans-general",
-    "Hushållets Hjärta",
-    "Magisk Miljö-skapare",
-    "Ordningens Överstepräst",
-    "Guldputs-guvernör",
-    "Fixar-fenomen",
-    "Suverän Syssle-specialist",
-    "Universums Fixar-fyrstinna",
-    "Intergalaktisk Ordningsexpert",
-    "Odödlig Fixar-legend 🏆"
-  ];
 
   const getPoints = () => {
     return calculatePoints(tasks)
@@ -61,6 +36,8 @@ export const useTasks = () => {
     const taskTemp: Task | null = createTask(title)
 
     if (taskTemp) {
+      taskTemp.creator = user?.uid || ""
+      taskTemp.assignee = user?.uid || ""
       if (tasks?.length > 0) {
         setTasks((prev) => [...prev, taskTemp])
       } else {
@@ -78,14 +55,14 @@ export const useTasks = () => {
     setTotalXP((prev) => prev + getPoints())
     setBalance((prev) => prev + getPoints())
     setTasks((prev) => {
-      return prev.filter((p) => p.completed === false)
+      return prev.filter((p) => p.status !== "completed")
     })
   }
 
   const toggleStatus = (taskId: string) => {
     setTasks((prev) =>
       prev.map((p) =>
-        p.id === taskId ? { ...p, completed: !p.completed } : p,
+        p.id === taskId ? { ...p, status: p.status === "completed" ? "notStarted" : "completed" } : p,
       ),
     )
   }
@@ -99,22 +76,38 @@ export const useTasks = () => {
     setPurchase((prev) => [...prev, purchasedItem])
   }
 
+  /* SAVE TO FIRESTORE */
+  const saveTask = () => {
+    
+  }
+
   useEffect(() => {
     if (user) {
       setIsLoading(true)
       const fetchData = async () => {
         try {
-          const [tasks, balance, XPpoints, purchase] = await Promise.all([
-            taskRepository.getTasks(user.uid),
-            taskRepository.getBalance(user.uid),
-            taskRepository.getXPpoints(user.uid),
-            taskRepository.getPurchase(user.uid),
+         /*  const [tasks, balance, XPpoints, purchase] = await Promise.all([
+            taskRepository.fetchTasks(user.uid),
+            taskRepository.fetchBalance(user.uid),
+            taskRepository.fetchXPpoints(user.uid),
+            taskRepository.fetchPurchase(user.uid),
           ])
+
+          console.log("tasks: " + tasks)
 
           setTasks(tasks || [])
           setBalance(balance || 0)
           setTotalXP(XPpoints || 0)
           setPurchase(purchase || [])
+          setHasLoaded(true) */
+
+          const [tasks] = await Promise.all([
+            taskRepository.fetchTasks(user.uid),
+          ])
+
+          console.log("tasks: " + tasks)
+
+          setTasks(tasks || [])
           setHasLoaded(true)
         } catch (err) {
           console.error("Hämtning misslyckades:", err)
@@ -124,27 +117,25 @@ export const useTasks = () => {
       }
       fetchData()
     }
-  }, [, authLoading])
+  }, [user, authLoading])
 
-  useEffect(() => {
+   useEffect(() => {
     if (isLoading || !hasLoaded) return
 
     const saveData = async () => {
       if (user)
         try {
-          await Promise.all([
-            taskRepository.saveTasks(tasks, user?.uid),
-            taskRepository.saveBalance(balance, user?.uid),
-            taskRepository.saveXPpoints(totalXP, user?.uid),
-            taskRepository.savePurchase(purchase, user?.uid),
-          ])
+          await taskRepository.storeTasks(tasks, user?.uid)
+          await taskRepository.storeBalance(balance, user?.uid)
+          await taskRepository.storeXPpoints(totalXP, user?.uid)
+          await taskRepository.storePurchase(purchase, user?.uid)
         } catch (err) {
           console.error("Bakgrundssparande misslyckades:", err)
         }
     }
 
     saveData()
-  }, [tasks, balance, totalXP, purchase, isLoading])
+  }, [tasks, balance, totalXP, purchase, isLoading]) 
 
   return {
     tasks,

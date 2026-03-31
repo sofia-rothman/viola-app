@@ -15,11 +15,11 @@ const TaskItem = (props: TaskProps) => {
       <div>
         <button
           className={`status-button ${
-            task.completed ? "completed" : "pending"
+            task.status === "completed" ? "completed" : "pending"
           }`}
           onClick={() => toggleStatus(task.id)}
         >
-          {task.completed ? "Ångra" : "Markera som klar"}
+          {task.status === "completed" ? "Ångra" : "Markera som klar"}
         </button>
       </div>
     </div>

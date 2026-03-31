@@ -1,4 +1,5 @@
 export interface Account {
+    id: string,
     experience: number,
     balance: number,
     restrictedItems: string[],
@@ -6,8 +7,9 @@ export interface Account {
     parents: string[]
 }
 
-export const createAccount = () => {
+export const createAccount = (uid: string) => {
     return {
+        id: uid,
         experience: 0,
         balance: 0,
         restrictedItems: [],

@@ -14,17 +14,28 @@ export const useAccount = (props: useAccountProps) => {
 
 
 	const saveAccount = () => {
-		setAccount(createAccount())
+		user?.uid &&
+		setAccount(createAccount(user?.uid))
 	}
 
 	useEffect(() => {
 		if (user) {
 			setLoading(true)
+
 			const getAccountFromDatabase = async () => {
 				try {
-					const account = await taskRepository.getUser(user.uid)
+					const account = await taskRepository.fetchUser(user.uid)
+
+					if(account) {
+						setAccount(account)
+					} else {
+						const newAccount = createAccount(user.uid)
+						await taskRepository.storeUser(newAccount, user.uid)
+						setAccount(newAccount)
+					}
+
 					console.log('ACCOUNT from task repository: ' + account + ' ' + account?.balance + ' ' + account?.experience)
-					setAccount(account)
+
 				} catch (err) {
           console.error("Hämtning misslyckades:", err)
         } finally {

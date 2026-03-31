@@ -1,10 +1,11 @@
 import type { Purchase } from "../../types/Purchase"
 import type { Task } from "../../types/Task"
+import type { Account } from "../../types/Account"
 import { storage } from "../../utils/localstorage"
-import type ITaskRepository from "../interface/ITaskRepository"
+import type ITaskRepository from "../interface/IRepository"
 
 export default class LocalStorageRepository implements ITaskRepository {
-  async getTasks(): Promise<Task[] | null> {
+  async fetchTasks(_userId: string): Promise<Task[] | null> {
     try {
       const tasks = storage.get<Task[]>("tasks")
       return tasks
@@ -13,7 +14,7 @@ export default class LocalStorageRepository implements ITaskRepository {
     }
   }
 
-  async saveTasks(tasks: Task[]): Promise<void> {
+  async storeTasks(tasks: Task[], _userId: string): Promise<void> {
     try {
       storage.save("tasks", tasks)
     } catch (error) {
@@ -21,7 +22,7 @@ export default class LocalStorageRepository implements ITaskRepository {
     }
   }
 
-  async getBalance(): Promise<number | null> {
+  async fetchBalance(_userId: string): Promise<number | null> {
     try {
       const balance = storage.get<number>("balance")
       return balance
@@ -30,7 +31,7 @@ export default class LocalStorageRepository implements ITaskRepository {
     }
   }
 
-  async saveBalance(balance: number): Promise<void> {
+  async storeBalance(balance: number, _userId: string): Promise<void> {
     try {
       storage.save("balance", balance)
     } catch (error) {
@@ -38,7 +39,7 @@ export default class LocalStorageRepository implements ITaskRepository {
     }
   }
 
-  async getXPpoints(): Promise<number | null> {
+  async fetchXPpoints(_userId: string): Promise<number | null> {
     try {
       const XPpoints = storage.get<number>("XPpoints")
       return XPpoints
@@ -47,7 +48,7 @@ export default class LocalStorageRepository implements ITaskRepository {
     }
   }
 
-  async saveXPpoints(XPpoints: number): Promise<void> {
+  async storeXPpoints(XPpoints: number, _userId: string): Promise<void> {
     try {
       storage.save("XPpoints", XPpoints)
     } catch (error) {
@@ -55,7 +56,7 @@ export default class LocalStorageRepository implements ITaskRepository {
     }
   }
 
-  async getPurchase(): Promise<Purchase[] | null> {
+  async fetchPurchase(_userId: string): Promise<Purchase[] | null> {
     try {
       const purchase = storage.get<Purchase[]>("purchase")
       if (!purchase) return null
@@ -69,11 +70,20 @@ export default class LocalStorageRepository implements ITaskRepository {
     }
   }
 
-  async savePurchase(purchase: Purchase[]): Promise<void> {
+  async storePurchase(purchase: Purchase[], _userId: string): Promise<void> {
     try {
       storage.save("purchase", purchase)
     } catch (error) {
       throw "Method not implemented: " + error
     }
+  }
+
+  async storeUser(accountInfo: Account, _userId: string): Promise<void> {
+    // LocalStorage fallback: single shared account state (ignores userId).
+    storage.save("account", accountInfo)
+  }
+
+  async fetchUser(_userId: string): Promise<Account | null> {
+    return storage.get<Account>("account")
   }
 }
