@@ -29,7 +29,7 @@ export const useAccount = (props: useAccountProps) => {
 	}
 
 	useEffect(() => {
-		if (user && !isLoadingAuth) {
+		if (user && !isLoadingAuth && account == null) {
 			setLoading(true)
 
 			const getAccountFromDatabase = async () => {
@@ -53,6 +53,20 @@ export const useAccount = (props: useAccountProps) => {
 			getAccountFromDatabase()
 		}
 	}, [user?.uid])
+
+	useEffect(() => {
+    if (loading || isLoadingAuth || account == null || user == null) return
+
+    const storeData = async () => {
+      try {
+        await taskRepository.storeUser(account, user?.uid)
+      } catch (err) {
+        console.error("Bakgrundssparande misslyckades:", err)
+      }
+    }
+
+    storeData()
+  }, [account, loading])
 
 	return { account, saveAccount, saveBalance, saveXP, loading }
 }

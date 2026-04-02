@@ -10,14 +10,15 @@ import TaskPage from "./pages/TaskPage/TaskPage"
 import useAccountContext from "./context/AccountContext"
 
 function App() {
-  const taskContext = useTaskContext()
+  const {showCelebration} = useTaskContext()
   const {account, loading} = useAccountContext()
 
   if (loading) return <div className="loader">Hämtar profil...</div>;
+  
   return (
     <>
       <div className="app-wrapper">
-        {taskContext.showCelebration && <CelebrationModal/>}
+        {showCelebration && <CelebrationModal/>}
         <Header />
         {account &&
           <Routes>

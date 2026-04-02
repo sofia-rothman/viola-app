@@ -149,7 +149,7 @@ export const useTasks = () => {
   useEffect(() => {
     if (isLoading || !hasLoaded || isLoadingAuth) return
 
-    const saveData = async () => {
+    const storeData = async () => {
       if (user)
         try {
           await taskRepository.storeTasks(tasks)
@@ -159,7 +159,7 @@ export const useTasks = () => {
         }
     }
 
-    saveData()
+    storeData()
   }, [tasks, purchase, isLoading])
 
   return {
