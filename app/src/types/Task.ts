@@ -1,4 +1,4 @@
-export type TaskStatus = "completed" | "notStarted" | "inProgress" | "approved"
+export type TaskStatus = "completed" | "notStarted" | "inProgress" | "approved" | 'archived'
 
 export interface Task {
   id: string
@@ -7,6 +7,7 @@ export interface Task {
   dueDate: Date | null
   creator: string
   assignee: string | null
+  completedAt: Date | null
 }
 
 export const createTask = (rawTitle: string, status: TaskStatus = "notStarted", creator: string = "9MlHcEMMGGY1kqxwRPrgRICOVPV2", assignee: string = "9MlHcEMMGGY1kqxwRPrgRICOVPV2"): Task | null => {
@@ -24,5 +25,6 @@ export const createTask = (rawTitle: string, status: TaskStatus = "notStarted", 
     dueDate: new Date(),
     creator: creator,
     assignee: assignee,
+    completedAt: null,
   }
 }

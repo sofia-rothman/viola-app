@@ -7,7 +7,10 @@ import EmptyState from "../../../../components/EmptyState/EmptyState"
 const TaskList = () => {
   const taskContext = useTaskContext()
 
-  const sortedTasks = taskContext?.tasks?.sort((a, b) => a.status === "completed" ? 1 : -1)
+  const sortedTasks = [...(taskContext?.tasks ?? [])].sort((a, b) => {
+    if (a.status === b.status) return 0
+    return a.status === "completed" ? 1 : -1
+  })
 
   if (taskContext?.tasks?.length > 0) {
     return (
@@ -17,7 +20,7 @@ const TaskList = () => {
             key={task.id}
             className={`list-item ${task.status === "completed" && "completed"}`}
           >
-            <TaskItem task={task} toggleStatus={taskContext.toggleStatus} />
+            <TaskItem task={task} />
             <div className="button-container">
               <button
                 className="delete-button"

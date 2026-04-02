@@ -18,6 +18,16 @@ export const useAccount = (props: useAccountProps) => {
 		setAccount(createAccount(user?.uid))
 	}
 
+	const saveBalance = (balance: number) => {
+		if(!account) return
+		setAccount(prev => ({ ...prev!, balance: prev!.balance + balance }))
+	}
+
+	const saveXP = (XP: number) => {
+		if(!account) return
+		setAccount(prev => ({ ...prev!, experience: prev!.experience + XP }))
+	}
+
 	useEffect(() => {
 		if (user && !isLoadingAuth) {
 			setLoading(true)
@@ -34,8 +44,6 @@ export const useAccount = (props: useAccountProps) => {
 						setAccount(newAccount)
 					}
 
-					console.log('ACCOUNT from task repository: ' + account + ' ' + account?.balance + ' ' + account?.experience)
-
 				} catch (err) {
           console.error("Hämtning misslyckades:", err)
         } finally {
@@ -46,5 +54,5 @@ export const useAccount = (props: useAccountProps) => {
 		}
 	}, [user?.uid])
 
-	return { account, saveAccount, loading }
+	return { account, saveAccount, saveBalance, saveXP, loading }
 }

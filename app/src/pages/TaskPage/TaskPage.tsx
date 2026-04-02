@@ -4,7 +4,7 @@ import TaskList from "./components/TaskList/TaskList"
 import "./TaskPage.css"
 
   const TaskPage = () => {
-  const { account, loading: isLoadingAccount } = useAccountContext()
+  const { account } = useAccountContext()
 
   if(account) return (
     <div className="task-page-container">

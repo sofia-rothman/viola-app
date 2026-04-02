@@ -1,13 +1,18 @@
 import type { Task } from "../../../../types/Task"
 import "./TaskItem.css"
+import useTaskContext from "../../../../context/TaskContext"
 
 interface TaskProps {
   task: Task
-  toggleStatus: (taskId: string) => void
 }
 
 const TaskItem = (props: TaskProps) => {
-  const { task, toggleStatus } = props
+  const { task } = props
+  const taskContext = useTaskContext()
+
+  const handleToggleStatus = () => {
+    taskContext.toggleStatus(task.id)
+  }
 
   return (
     <div className="task-card">
@@ -17,7 +22,7 @@ const TaskItem = (props: TaskProps) => {
           className={`status-button ${
             task.status === "completed" ? "completed" : "pending"
           }`}
-          onClick={() => toggleStatus(task.id)}
+          onClick={handleToggleStatus}
         >
           {task.status === "completed" ? "Ångra" : "Markera som klar"}
         </button>

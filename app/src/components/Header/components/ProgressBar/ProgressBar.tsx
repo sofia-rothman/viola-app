@@ -1,14 +1,13 @@
-import type { RefObject } from "react"
 import "./ProgressBar.css"
 
 interface ProgressBarProps {
   points: number
-  goal: RefObject<number>
+  goal: number
 }
 
 const ProgressBar = (props: ProgressBarProps) => {
   const { points, goal } = props
-  const percentage = (points / goal.current) * 100
+  const percentage = (points / goal) * 100
 
   return (
     <div className="progress-bar-container">
@@ -16,7 +15,7 @@ const ProgressBar = (props: ProgressBarProps) => {
         <div key={points} className="score-display score-pop">
           Poäng: {points}
         </div>
-        <div>Nästa mål: {goal.current}</div>
+        <div>Nästa mål: {goal}</div>
       </div>
       <div className="progress-outer">
         <div

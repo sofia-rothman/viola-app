@@ -20,7 +20,6 @@ export default class FirebaseRepository implements IRepository {
 
     try {
       const userDoc = await getDoc(userRef);
-      console.log('USER ID: ' + userDoc.id)
       return userDoc.exists() ? userDoc.data() as Account : null;
     } catch (error) {
       console.error("Fel vid getUser:", error);
@@ -53,7 +52,6 @@ export default class FirebaseRepository implements IRepository {
 
     tasks.map((task) => {
       const taskRef = doc(db, "tasks", task.id);
-      console.log('TASK ID: ' + task.id)
       batch.set(taskRef, task)
     })
 

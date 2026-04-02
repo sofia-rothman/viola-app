@@ -33,10 +33,14 @@ const Header = () => {
             <StatCard
               icon={"wallet"}
               label={"Plånbok"}
-              value={`${account?.balance} kr`}
+              value={`${account?.balance || 0} kr`}
             />
 
-            <StatCard icon={"star"} label={"XP"} value={`${account?.experience}`} />
+            <StatCard 
+              icon={"star"} 
+              label={"XP"} 
+              value={`${account?.experience || 0}`} 
+            />
           </div>
         </div>
       </div>

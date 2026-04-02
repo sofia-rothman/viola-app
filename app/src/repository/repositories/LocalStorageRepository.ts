@@ -14,7 +14,7 @@ export default class LocalStorageRepository implements ITaskRepository {
     }
   }
 
-  async storeTasks(tasks: Task[], _userId: string): Promise<void> {
+  async storeTasks(tasks: Task[]): Promise<void> {
     try {
       storage.save("tasks", tasks)
     } catch (error) {

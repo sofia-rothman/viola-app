@@ -3,6 +3,8 @@ import type { Account } from "../types/Account"
 
 interface AccountContextValue {
   account: Account | null
+  saveBalance: (balance: number) => void
+  saveXP: (XP: number) => void
   saveAccount: () => void
   loading: boolean
 }

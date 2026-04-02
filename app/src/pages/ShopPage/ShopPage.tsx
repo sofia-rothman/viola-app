@@ -7,14 +7,14 @@ import RewardCard from "./components/RewardCard/RewardCard"
 import useAccountContext from "../../context/AccountContext"
 
 const ShopPage = () => {
-  const { account, loading: isLoadingAccount } = useAccountContext()
+  const { account } = useAccountContext()
   const taskContext = useTaskContext()
-  const [displayBalance, setDisplayBalance] = useState(taskContext.balance)
+  const [displayBalance, setDisplayBalance] = useState(account?.balance || 0)
 
   useEffect(() => {
     const timer = setInterval(() => {
       setDisplayBalance((prev) => {
-        const target = taskContext.balance
+        const target = account?.balance || 0
 
         if (prev === target) {
           clearInterval(timer)
@@ -26,7 +26,7 @@ const ShopPage = () => {
     }, 70)
 
     return () => clearInterval(timer)
-  }, [taskContext.balance])
+  }, [account?.balance])
 
   
     if(account) return (

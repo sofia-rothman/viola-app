@@ -10,24 +10,24 @@ import TaskPage from "./pages/TaskPage/TaskPage"
 import useAccountContext from "./context/AccountContext"
 
 function App() {
-  const tasks = useTaskContext()
+  const taskContext = useTaskContext()
   const {account, loading} = useAccountContext()
-  const isGoalReached = tasks.points >= tasks.goal.current
 
   if (loading) return <div className="loader">Hämtar profil...</div>;
   return (
     <>
-    <div className="app-wrapper">
-      {isGoalReached && <CelebrationModal />}
-       <Header />
-       {account &&
-        <Routes>
-        {/*  <Route path="/" element={<DashboardPage />} /> */}
-          <Route path="/" element={<TaskPage />} />
-          <Route path="/shop" element={<ShopPage />} />
-        </Routes> 
-       }
-    </div>
+      <div className="app-wrapper">
+        {taskContext.showCelebration && <CelebrationModal/>}
+        <Header />
+        {account &&
+          <Routes>
+          {/*  <Route path="/" element={<DashboardPage />} /> */}
+            <Route path="/" element={<TaskPage />} />
+            <Route path="/shop" element={<ShopPage />} />
+          </Routes> 
+        }
+      </div>
+
       <Navbar />
     </>
   )
