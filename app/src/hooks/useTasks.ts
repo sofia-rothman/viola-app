@@ -3,7 +3,7 @@ import { createTask, type Task } from "../types/Task"
 import { type Reward } from "../types/Reward"
 import { createPurchase, type Purchase } from "../types/Purchase"
 import { taskRepository } from "../repository"
-import { calculateLevel } from "../utils/taskHelpers"
+import { calculateLevel, calculatePoints } from "../utils/taskHelpers"
 import { RANK_TITLES } from "../utils/rankTitles"
 import useAuthContext from "../context/AuthContext"
 import useAccountContext from "../context/AccountContext"
@@ -20,10 +20,9 @@ export const useTasks = () => {
 
   const goal = 20;
 
-  /*   const getPoints = () => {
-      setPoints(calculatePoints(tasks))
-      return points
-    } */
+    const getPoints = () => {
+      return calculatePoints(tasks)
+    }
 
   const getLevel = () => {
     return calculateLevel(account?.experience || 0, goal)
@@ -59,28 +58,18 @@ export const useTasks = () => {
     saveBalance(points)
     setPoints(0)
     setTasks((prev) => {
-      return prev.filter((p) => p.status != "completed")
-    })
+      return prev.filter((p) => p.status == "completed" ? "archived" : p)
+    }) 
     setShowCelebration(false)
   }
 
-  /*   const toggleStatus = (taskId: string) => {
-      setTasks((prev) =>
-        prev.map((p) =>
-          p.id === taskId ? { ...p, status: p.status === "completed" ? "notStarted" : "completed" } : p,
-        ),
-      )
-    } */
-
   const toggleStatus = (taskId: string) => {
-    // 1. Hitta uppgiften direkt i nuvarande 'tasks' (utanför setState)
     const taskToToggle = tasks.find(t => t.id === taskId);
     if (!taskToToggle) return;
 
     const isCompleting = taskToToggle.status !== "completed";
     const pointChange = isCompleting ? 10 : -10;
 
-    // 2. Uppdatera tasks
     setTasks((prev) => prev.map((task) => {
       if (task.id === taskId) {
         const isCompleting = task.status !== "completed";
@@ -88,7 +77,6 @@ export const useTasks = () => {
         return {
           ...task,
           status: isCompleting ? "completed" : "notStarted",
-          completedAt: isCompleting ? new Date() : null
         };
       }
       return task;
@@ -179,7 +167,7 @@ export const useTasks = () => {
     addTask,
     toggleStatus,
     deleteTask,
-    points,
+    points: getPoints(),
     clearTasks,
     // eslint-disable-next-line react-hooks/refs
     level: getLevel(),
