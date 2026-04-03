@@ -55,7 +55,7 @@ export const useTasks = () => {
 
   const clearTasks = () => {
     saveXP(points)
-    saveBalance(points)
+    saveBalance(getPoints())
     setPoints(0)
     setTasks((prev) => {
       return prev.map((p) => {

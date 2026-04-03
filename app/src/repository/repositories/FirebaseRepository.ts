@@ -3,7 +3,7 @@ import type IRepository from "../interface/IRepository"
 import type { Task } from "../../types/Task"
 import type { Purchase } from "../../types/Purchase"
 import type { Account } from "../../types/Account"
-import { addDoc, collection, doc, getDoc, getDocs, query, setDoc, Timestamp, where, writeBatch } from "firebase/firestore"
+import { collection, doc, getDoc, getDocs, or, query, setDoc, Timestamp, where, writeBatch } from "firebase/firestore"
 
 export default class FirebaseRepository implements IRepository {
   async storeUser(accountInfo: Account, userId: string): Promise<void> {
@@ -29,7 +29,7 @@ export default class FirebaseRepository implements IRepository {
 
   async fetchTasks(userId: string): Promise<Task[] | null> {
     const tasksRef = collection(db, "tasks");
-    const q = query(tasksRef, where("creator", "==", userId), where("assignee", "==", userId));
+    const q = query(tasksRef, or( where("creator", "==", userId), where("assignee", "==", userId)));
 
     try {
       const querySnapshot = await getDocs(q);
