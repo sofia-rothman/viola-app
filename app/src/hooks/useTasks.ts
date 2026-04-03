@@ -58,7 +58,12 @@ export const useTasks = () => {
     saveBalance(points)
     setPoints(0)
     setTasks((prev) => {
-      return prev.filter((p) => p.status == "completed" ? "archived" : p)
+      return prev.map((p) => {
+        return {
+          ...p,
+          status: p.status == "completed" ? "archived" : p.status
+        }
+      })
     }) 
     setShowCelebration(false)
   }
