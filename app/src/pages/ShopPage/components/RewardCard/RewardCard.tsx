@@ -3,6 +3,7 @@ import useTaskContext from "../../../../context/TaskContext"
 import "./RewardCard.css"
 import { useState } from "react"
 import type { Reward } from "../../../../types/Reward"
+import useAccountContext from "../../../../context/AccountContext"
 
 interface RewardCardProps {
   item: Reward
@@ -11,10 +12,11 @@ interface RewardCardProps {
 const RewardCard = (props: RewardCardProps) => {
   const { item } = props
   const taskContext = useTaskContext()
+  const { account } = useAccountContext()
   const [isPurchased, setIsPurchased] = useState(false)
   const navigate = useNavigate()
 
-  const canAfford = taskContext.balance >= item.price
+  const canAfford = account?.balance && account.balance >= item.price
 
   const handleClick = () => {
     if (canAfford) {

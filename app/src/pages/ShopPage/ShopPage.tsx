@@ -4,17 +4,17 @@ import { rewards } from "../../data/rewards"
 import "./ShopPage.css"
 import PurchaseRow from "./components/PurchaseRow/PurchaseRow"
 import RewardCard from "./components/RewardCard/RewardCard"
-import { useAuth } from "../../hooks/useAuth"
+import useAccountContext from "../../context/AccountContext"
 
 const ShopPage = () => {
-  const { user } = useAuth()
+  const { account } = useAccountContext()
   const taskContext = useTaskContext()
-  const [displayBalance, setDisplayBalance] = useState(taskContext.balance)
+  const [displayBalance, setDisplayBalance] = useState(account?.balance || 0)
 
   useEffect(() => {
     const timer = setInterval(() => {
       setDisplayBalance((prev) => {
-        const target = taskContext.balance
+        const target = account?.balance || 0
 
         if (prev === target) {
           clearInterval(timer)
@@ -26,10 +26,10 @@ const ShopPage = () => {
     }, 70)
 
     return () => clearInterval(timer)
-  }, [taskContext.balance])
+  }, [account?.balance])
 
   
-    if(user) return (
+    if(account) return (
     <div className="shop-container">
       Du har {displayBalance} ⭐️ att handla för
       <div className="shop-grid">

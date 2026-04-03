@@ -12,12 +12,12 @@ interface TaskContextValue {
   clearTasks: () => void
   level: number
   title: string
-  goal: React.RefObject<number>
+  goal: number
   purchaseItem: (item: Reward) => false | undefined
   purchase: Purchase[]
-  totalXP: number
-  balance: number
   isLoading: boolean
+  showCelebration: boolean
+  setShowCelebration: (show: boolean) => void
 }
 
 export const TaskContext = createContext<TaskContextValue | undefined>(

@@ -8,17 +8,25 @@ describe('calculatePoints', () => {
     expect(calculatePoints([])).toBe(0)
   })
   it('should return 0 for two uncompleted tasks', () => {
-    const mockTasks = [{ completed: false }, { completed: false }] as Task[]
+    const mockTasks = [
+      { status: 'notStarted' },
+      { status: 'notStarted' },
+    ] as Task[]
     expect(calculatePoints(mockTasks)).toBe(0)
   })
 
   /* */
   it('should return 20 for two completed tasks', () => {
-    const mockTasks = [{ completed: true }, { completed: true }] as Task[]
+    const mockTasks = [{ status: 'completed' }, { status: 'completed' }] as Task[]
     expect(calculatePoints(mockTasks)).toBe(20)
   })
-  it('should return 10 for two completed tasks', () => {
-    const mockTasks = [{ completed: true }, { completed: false },{ completed: false }, { completed: false }] as Task[]
+  it('should return 10 for one completed task among four', () => {
+    const mockTasks = [
+      { status: 'completed' },
+      { status: 'notStarted' },
+      { status: 'notStarted' },
+      { status: 'notStarted' },
+    ] as Task[]
     expect(calculatePoints(mockTasks)).toBe(10)
   })
 })

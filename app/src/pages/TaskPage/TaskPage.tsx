@@ -1,12 +1,12 @@
-import { useAuth } from "../../hooks/useAuth"
+import useAccountContext from "../../context/AccountContext"
 import TaskInput from "./components/TaskInput/TaskInput"
 import TaskList from "./components/TaskList/TaskList"
 import "./TaskPage.css"
 
-const TaskPage = () => {
-  const { user } = useAuth()
+  const TaskPage = () => {
+  const { account } = useAccountContext()
 
-  if(user) return (
+  if(account) return (
     <div className="task-page-container">
       <TaskInput />
       <div className="task-list-wrapper">

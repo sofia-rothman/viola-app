@@ -2,21 +2,15 @@ import TaskItem from "../TaskItem/TaskItem"
 import deleteIcon from "../../../../assets/delete-226.svg"
 import "./TaskList.css"
 import useTaskContext from "../../../../context/TaskContext"
-import type { Task } from "../../../../types/Task"
 import EmptyState from "../../../../components/EmptyState/EmptyState"
 
 const TaskList = () => {
   const taskContext = useTaskContext()
 
-  const compareFn = (a: Task, b: Task) => {
-    if (a.completed > b.completed) {
-      return 1
-    } else if (a.completed < b.completed) {
-      return -1
-    } else return 0
-  }
-
-  const sortedTasks = taskContext?.tasks?.sort((a, b) => compareFn(a, b))
+  const sortedTasks = [...(taskContext?.tasks ?? [])].sort((a, b) => {
+    if (a.status === b.status) return 0
+    return a.status === "completed" ? 1 : -1
+  })
 
   if (taskContext?.tasks?.length > 0) {
     return (
@@ -24,9 +18,9 @@ const TaskList = () => {
         {sortedTasks?.map((task) => (
           <div
             key={task.id}
-            className={`list-item ${task.completed && "completed"}`}
+            className={`list-item ${task.status === "completed" && "completed"}`}
           >
-            <TaskItem task={task} toggleStatus={taskContext.toggleStatus} />
+            <TaskItem task={task} />
             <div className="button-container">
               <button
                 className="delete-button"

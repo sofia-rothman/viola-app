@@ -4,7 +4,12 @@ import { useEffect } from "react"
 import useTaskContext from "../../context/TaskContext"
 
 const CelebrationModal = () => {
-  const tasks = useTaskContext()
+  const {clearTasks, setShowCelebration} = useTaskContext()
+
+  const handleClick = () => {
+    setShowCelebration(false)
+    clearTasks()
+  }
 
   useEffect(() => {
     confetti({
@@ -25,7 +30,7 @@ const CelebrationModal = () => {
           Du har nått dina mål för dagen. Fortsätt så här för att hålla sviten
           vid liv!
         </h3>
-        <button className="close-button" onClick={tasks.clearTasks}>
+        <button className="close-button" onClick={() => handleClick()}>
           Stäng
         </button>
       </div>
