@@ -14,6 +14,10 @@ const TaskItem = (props: TaskProps) => {
     taskContext.toggleStatus(task.id)
   }
 
+  const archiveTask = () => {
+    taskContext.archiveTask(task.id)
+  }
+
   return (
     <div className="task-card">
       <>{task.title}</>
@@ -27,6 +31,16 @@ const TaskItem = (props: TaskProps) => {
           {task.status === "completed" ? "Ångra" : "Markera som klar"}
         </button>
       </div>
+      {task.status === "completed" && 
+        <button
+          className={`status-button ${
+            task.status === "completed" ? "completed" : "pending"
+          }`}
+          onClick={archiveTask}
+        >
+          Godkänn
+        </button>
+      }
     </div>
   )
 }

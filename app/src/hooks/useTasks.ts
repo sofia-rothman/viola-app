@@ -69,27 +69,39 @@ export const useTasks = () => {
   }
 
   const toggleStatus = (taskId: string) => {
-    const taskToToggle = tasks.find(t => t.id === taskId);
+    const taskToToggle = tasks.find(t => t.id === taskId)
     if (!taskToToggle) return;
 
-    const isCompleting = taskToToggle.status !== "completed";
-    const pointChange = isCompleting ? 10 : -10;
+    const isCompleting = taskToToggle.status !== "completed"
 
     setTasks((prev) => prev.map((task) => {
       if (task.id === taskId) {
-        const isCompleting = task.status !== "completed";
-        
         return {
           ...task,
-          status: isCompleting ? "completed" : "notStarted",
+          status: isCompleting ? "completed" : "inProgress",
+        };
+      }
+      return task
+    }))
+  }
+
+  const archiveTask = (taskId: string) => {
+    const taskToArchive = tasks.find(t => t.id === taskId);
+    if (!taskToArchive) return;
+
+    const pointChange = 10;
+
+    setTasks((prev) => prev.map((task) => {
+      if (task.id === taskId) {
+        return {
+          ...task,
+          status: "archived",
         };
       }
       return task;
     }));
-    
     updatePoints(pointChange)
-    
-  };
+  }
 
   const updatePoints = (pointChange: number) => {
     setPoints((prevPoints) => {
@@ -97,7 +109,7 @@ export const useTasks = () => {
 
       if (newPoints >= goal && !showCelebration) {
         setShowCelebration(true);
-      }
+        }
 
       return newPoints;
     });
@@ -172,6 +184,7 @@ export const useTasks = () => {
     addTask,
     toggleStatus,
     deleteTask,
+    archiveTask,
     points: getPoints(),
     clearTasks,
     // eslint-disable-next-line react-hooks/refs
