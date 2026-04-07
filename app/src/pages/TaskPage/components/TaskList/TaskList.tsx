@@ -18,34 +18,45 @@ const TaskList = () => {
 
   if (taskContext?.tasks?.length > 0) {
     return (
-      <div className="list">
-        {inProgressTasks?.map((task) => (
-          <div
-            key={task.id}
-            className={`list-item ${task.status === "completed" && "completed"}`}
-          >
-            <TaskItem task={task} />
-            <div className="button-container">
-              <button
-                className="delete-button"
-                onClick={() => taskContext.deleteTask(task.id)}
-              >
-                <img src={deleteIcon} alt="Radera" />
-              </button>
+      <div>
+        <div className="list">
+          {inProgressTasks?.map((task) => (
+            <div
+              key={task.id}
+              className={`list-item ${task.status === "completed" && "completed"}`}
+            >
+              <TaskItem task={task} />
+              <div className="button-container">
+                <button
+                  className="delete-button"
+                  onClick={() => taskContext.deleteTask(task.id)}
+                >
+                  <img src={deleteIcon} alt="Radera" />
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
-       {completedTasks?.map((task) => (
-          <div key={task.id}>
-            <TaskItem task={task} />
-          </div>
-        ))}
-        {archivedTasks?.map((task) => (
-            <div key={task.id}>
+          ))}
+          {completedTasks?.map((task) => (
+            <div key={task.id}
+              className={`list-item ${task.status === "completed" && "completed"}`}
+            >
               <TaskItem task={task} />
             </div>
+          ))}
+        </div>
+        <div>
+          ARKIVET
+          {archivedTasks?.map((task) => (
+            <div key={task.id}
+              className={`archived-item`}
+            >
+              <TaskItem task={task} />
+              {task.completedAt && <p>task completed at </p>}
+              {task.approvedAt && <p>task approved at </p>}
+            </div>
           )
-        )} 
+          )}
+        </div>
       </div>
     )
   } else return <EmptyState />

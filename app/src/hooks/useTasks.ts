@@ -20,9 +20,9 @@ export const useTasks = () => {
 
   const goal = 20;
 
-    const getPoints = () => {
-      return calculatePoints(tasks)
-    }
+  const getPoints = () => {
+    return calculatePoints(tasks)
+  }
 
   const getLevel = () => {
     return calculateLevel(account?.experience || 0, goal)
@@ -57,14 +57,6 @@ export const useTasks = () => {
     saveXP(points)
     saveBalance(getPoints())
     setPoints(0)
-    setTasks((prev) => {
-      return prev.map((p) => {
-        return {
-          ...p,
-          status: p.status == "completed" ? "archived" : p.status
-        }
-      })
-    }) 
     setShowCelebration(false)
   }
 
@@ -79,6 +71,7 @@ export const useTasks = () => {
         return {
           ...task,
           status: isCompleting ? "completed" : "inProgress",
+          completedAt: isCompleting ? new Date() : null,
         };
       }
       return task
@@ -96,6 +89,7 @@ export const useTasks = () => {
         return {
           ...task,
           status: "archived",
+          approvedAt: new Date(),
         };
       }
       return task;
@@ -109,7 +103,7 @@ export const useTasks = () => {
 
       if (newPoints >= goal && !showCelebration) {
         setShowCelebration(true);
-        }
+      }
 
       return newPoints;
     });
@@ -132,20 +126,6 @@ export const useTasks = () => {
       setIsLoading(true)
       const fetchData = async () => {
         try {
-          /*  const [tasks, balance, XPpoints, purchase] = await Promise.all([
-             taskRepository.fetchTasks(user.uid),
-             taskRepository.fetchBalance(user.uid),
-             taskRepository.fetchXPpoints(user.uid),
-             taskRepository.fetchPurchase(user.uid),
-           ])
- 
-           console.log("tasks: " + tasks)
- 
-           setTasks(tasks || [])
-           setBalance(balance || 0)
-           setTotalXP(XPpoints || 0)
-           setPurchase(purchase || [])
-           setHasLoaded(true) */
 
           const [tasks] = await Promise.all([
             taskRepository.fetchTasks(user.uid),
@@ -185,7 +165,7 @@ export const useTasks = () => {
     toggleStatus,
     deleteTask,
     archiveTask,
-    points: getPoints(),
+    points,
     clearTasks,
     // eslint-disable-next-line react-hooks/refs
     level: getLevel(),
