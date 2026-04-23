@@ -7,30 +7,51 @@ import EmptyState from "../../../../components/EmptyState/EmptyState"
 const TaskList = () => {
   const taskContext = useTaskContext()
 
-  const sortedTasks = [...(taskContext?.tasks ?? [])].sort((a, b) => {
-    if (a.status === b.status) return 0
-    return a.status === "completed" ? 1 : -1
-  })
+  const archivedTasks = taskContext?.tasks?.filter((task) => task.status === "archived")
+  const completedTasks = taskContext?.tasks?.filter((task) => task.status === "completed")
+  const pendingTasks = taskContext?.tasks?.filter((task) => task.status === "pending" || task.status === "notStarted")
 
   if (taskContext?.tasks?.length > 0) {
     return (
-      <div className="list">
-        {sortedTasks?.map((task) => (
-          <div
-            key={task.id}
-            className={`list-item ${task.status === "completed" && "completed"}`}
-          >
-            <TaskItem task={task} />
-            <div className="button-container">
-              <button
-                className="delete-button"
-                onClick={() => taskContext.deleteTask(task.id)}
-              >
-                <img src={deleteIcon} alt="Radera" />
-              </button>
+      <div>
+        <div className="list">
+          {pendingTasks?.map((task) => (
+            <div
+              key={task.id}
+              className={`list-item ${task.status === "completed" && "completed"}`}
+            >
+              <TaskItem task={task} />
+              <div className="button-container">
+                <button
+                  className="delete-button"
+                  onClick={() => taskContext.deleteTask(task.id)}
+                >
+                  <img src={deleteIcon} alt="Radera" />
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+          {completedTasks?.map((task) => (
+            <div key={task.id}
+              className={`list-item ${task.status === "completed" && "completed"}`}
+            >
+              <TaskItem task={task} />
+            </div>
+          ))}
+        </div>
+        <div>
+          ARKIVET
+          {archivedTasks?.map((task) => (
+            <div key={task.id}
+              className={`archived-item`}
+            >
+              <TaskItem task={task} />
+              {task.completedAt && <p>task completed at </p>}
+              {task.approvedAt && <p>task approved at </p>}
+            </div>
+          )
+          )}
+        </div>
       </div>
     )
   } else return <EmptyState />

@@ -10,23 +10,36 @@ const TaskItem = (props: TaskProps) => {
   const { task } = props
   const taskContext = useTaskContext()
 
-  const handleToggleStatus = () => {
+  const toggleStatus = () => {
     taskContext.toggleStatus(task.id)
   }
+
+  const archiveTask = () => {
+    taskContext.archiveTask(task.id)
+  }
+
+  const completedOrPending = task.status !== "archived"
 
   return (
     <div className="task-card">
       <>{task.title}</>
       <div>
-        <button
-          className={`status-button ${
-            task.status === "completed" ? "completed" : "pending"
-          }`}
-          onClick={handleToggleStatus}
+        {completedOrPending && <button
+          className={`status-button ${task.status === "completed" ? "completed" : "pending"
+            }`}
+          onClick={toggleStatus}
         >
           {task.status === "completed" ? "Ångra" : "Markera som klar"}
-        </button>
+        </button>}
       </div>
+      {task.status === "completed" &&
+        <button
+          className={`approve-button`}
+          onClick={archiveTask}
+        >
+          Godkänn
+        </button>
+      }
     </div>
   )
 }

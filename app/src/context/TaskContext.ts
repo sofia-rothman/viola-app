@@ -8,6 +8,7 @@ interface TaskContextValue {
   addTask: (title: string) => void
   toggleStatus: (taskId: string) => void
   deleteTask: (taskId: string) => void
+  archiveTask: (taskId: string) => void
   points: number
   clearTasks: () => void
   level: number
@@ -25,7 +26,7 @@ export const TaskContext = createContext<TaskContextValue | undefined>(
 )
 
 export default function useTaskContext() {
-  const tasks = useContext(TaskContext)
+  const tasks = useContext(TaskContext) 
 
   if (tasks === undefined) {
     throw new Error("useTaskContext must be used with TaskContext")

@@ -71,6 +71,13 @@ h3 { font-size: 1.6em; font-weight: 300; }
   margin: 0 auto;
   padding-bottom: 110px; 
   box-sizing: border-box;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.app-wrapper::-webkit-scrollbar {
+  display: none;
 }
 
 /* Desktop */

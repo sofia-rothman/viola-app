@@ -4,11 +4,10 @@ import { useEffect } from "react"
 import useTaskContext from "../../context/TaskContext"
 
 const CelebrationModal = () => {
-  const {clearTasks, setShowCelebration} = useTaskContext()
+  const {setShowCelebration} = useTaskContext()
 
   const handleClick = () => {
     setShowCelebration(false)
-    clearTasks()
   }
 
   useEffect(() => {

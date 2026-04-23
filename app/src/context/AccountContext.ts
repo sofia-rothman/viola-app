@@ -6,6 +6,7 @@ interface AccountContextValue {
   saveBalance: (balance: number) => void
   saveXP: (XP: number) => void
   saveAccount: () => void
+  savePoints: (points: number) => void
   loading: boolean
 }
 
