@@ -31,6 +31,8 @@ export default class FirebaseRepository implements IRepository {
     const tasksRef = collection(db, "tasks");
     const q = query(tasksRef, or( where("creator", "==", userId), where("assignee", "==", userId)));
 
+    // if try fails, then no tasks are returned
+    // add try catch within the map function
     try {
       const querySnapshot = await getDocs(q);
       return querySnapshot.docs.map(docSnap => {

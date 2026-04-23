@@ -9,11 +9,12 @@ interface AccountProviderProps {
 export const AccountProvider = (props: AccountProviderProps) => {
   const { children } = props
   const { user, loading: isLoadingAuth } = useAuthContext()
-  const { account, saveAccount, saveBalance, saveXP, loading } = useAccount({user: user, isLoadingAuth: isLoadingAuth})
+  const { account, saveAccount, savePoints, saveBalance, saveXP, loading } = useAccount({user: user, isLoadingAuth: isLoadingAuth})
 
   const values = {
     account: account,
     saveAccount: saveAccount,
+    savePoints: savePoints,
     saveBalance: saveBalance,
     saveXP: saveXP,
     loading: loading,

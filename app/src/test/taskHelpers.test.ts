@@ -9,8 +9,8 @@ describe('calculatePoints', () => {
   })
   it('should return 0 for two uncompleted tasks', () => {
     const mockTasks = [
-      { status: 'inProgress' },
-      { status: 'inProgress' },
+      { status: 'pending' },
+      { status: 'pending' },
     ] as Task[]
     expect(calculatePoints(mockTasks)).toBe(0)
   })
@@ -23,9 +23,9 @@ describe('calculatePoints', () => {
   it('should return 10 for one completed task among four', () => {
     const mockTasks = [
       { status: 'completed' },
-      { status: 'inProgress' },
-      { status: 'inProgress' },
-      { status: 'inProgress' },
+      { status: 'pending' },
+      { status: 'pending' },
+      { status: 'pending' },
     ] as Task[]
     expect(calculatePoints(mockTasks)).toBe(10)
   })

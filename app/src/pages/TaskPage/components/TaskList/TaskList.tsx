@@ -9,18 +9,13 @@ const TaskList = () => {
 
   const archivedTasks = taskContext?.tasks?.filter((task) => task.status === "archived")
   const completedTasks = taskContext?.tasks?.filter((task) => task.status === "completed")
-  const inProgressTasks = taskContext?.tasks?.filter((task) => task.status === "inProgress")
-
-  const sortedTasks = [...(taskContext?.tasks ?? [])].sort((a, b) => {
-    if (a.status === b.status) return 0
-    return a.status === "completed" ? 1 : -1
-  })
+  const pendingTasks = taskContext?.tasks?.filter((task) => task.status === "pending" || task.status === "notStarted")
 
   if (taskContext?.tasks?.length > 0) {
     return (
       <div>
         <div className="list">
-          {inProgressTasks?.map((task) => (
+          {pendingTasks?.map((task) => (
             <div
               key={task.id}
               className={`list-item ${task.status === "completed" && "completed"}`}

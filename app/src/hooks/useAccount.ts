@@ -18,6 +18,12 @@ export const useAccount = (props: useAccountProps) => {
 		setAccount(createAccount(user?.uid))
 	}
 
+	const savePoints = (points: number) => {
+		console.log("savePoints", points)
+		if(!account) return
+		setAccount(prev => ({ ...prev!, points: points }))
+	}
+
 	const saveBalance = (balance: number) => {
 		if(!account) return
 		setAccount(prev => ({ ...prev!, balance: prev!.balance + balance }))
@@ -68,5 +74,5 @@ export const useAccount = (props: useAccountProps) => {
     storeData()
   }, [account, loading])
 
-	return { account, saveAccount, saveBalance, saveXP, loading }
+	return { account, saveAccount, savePoints, saveBalance, saveXP, loading }
 }

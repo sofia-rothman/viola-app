@@ -10,7 +10,7 @@ const TaskItem = (props: TaskProps) => {
   const { task } = props
   const taskContext = useTaskContext()
 
-  const handleToggleStatus = () => {
+  const toggleStatus = () => {
     taskContext.toggleStatus(task.id)
   }
 
@@ -18,16 +18,16 @@ const TaskItem = (props: TaskProps) => {
     taskContext.archiveTask(task.id)
   }
 
-  const isCompletedOrInProgress = task.status === "completed" || task.status === "inProgress"
+  const completedOrPending = task.status !== "archived"
 
   return (
     <div className="task-card">
       <>{task.title}</>
       <div>
-        {isCompletedOrInProgress && <button
+        {completedOrPending && <button
           className={`status-button ${task.status === "completed" ? "completed" : "pending"
             }`}
-          onClick={handleToggleStatus}
+          onClick={toggleStatus}
         >
           {task.status === "completed" ? "Ångra" : "Markera som klar"}
         </button>}

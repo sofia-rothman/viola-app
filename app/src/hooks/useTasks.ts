@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { createTask, type Task } from "../types/Task"
+import { createTask, type Task, type TaskStatus } from "../types/Task"
 import { type Reward } from "../types/Reward"
 import { createPurchase, type Purchase } from "../types/Purchase"
 import { taskRepository } from "../repository"
@@ -16,13 +16,9 @@ export const useTasks = () => {
   const [points, setPoints] = useState(0)
   const [showCelebration, setShowCelebration] = useState(false)
   const { user, loading: isLoadingAuth } = useAuthContext()
-  const { account, saveBalance, saveXP } = useAccountContext()
+  const { account, saveBalance, saveXP, savePoints } = useAccountContext()
 
   const goal = 20;
-
-  const getPoints = () => {
-    return calculatePoints(tasks)
-  }
 
   const getLevel = () => {
     return calculateLevel(account?.experience || 0, goal)
@@ -35,7 +31,7 @@ export const useTasks = () => {
   }
 
   const addTask = (title: string) => {
-    const taskTemp: Task | null = createTask(title)
+    const taskTemp = createTask(title)
 
     if (taskTemp) {
       taskTemp.creator = user?.uid || ""
@@ -54,8 +50,6 @@ export const useTasks = () => {
   }
 
   const clearTasks = () => {
-    saveXP(points)
-    saveBalance(getPoints())
     setPoints(0)
     setShowCelebration(false)
   }
@@ -63,26 +57,55 @@ export const useTasks = () => {
   const toggleStatus = (taskId: string) => {
     const taskToToggle = tasks.find(t => t.id === taskId)
     if (!taskToToggle) return;
+    const newState = getNextTaskState(taskToToggle.status)
+    updateStatus(taskId, newState!)
+    updatePoints(newState!.points)
+  }
 
-    const isCompleting = taskToToggle.status !== "completed"
+  const getNextTaskState = (currentStatus: TaskStatus) => {
+    switch (currentStatus) {
+      case "notStarted":
+        return { status: "completed" as TaskStatus, points: 10 };
+      case "pending":
+        return { status: "completed" as TaskStatus, points: 10, completedAt: new Date() };
+      case "completed":
+        return { status: "pending" as TaskStatus, points: -10 };
+    }
+  }
 
+  const updateStatus = (taskId: string, newState: { status: TaskStatus, completedAt?: Date }) => {
     setTasks((prev) => prev.map((task) => {
       if (task.id === taskId) {
-        return {
-          ...task,
-          status: isCompleting ? "completed" : "inProgress",
-          completedAt: isCompleting ? new Date() : null,
-        };
+        return { ...task, status: newState.status, completedAt: newState.completedAt ? newState.completedAt : null };
       }
-      return task
+      return task;
     }))
+  }
+
+  const updatePoints = (pointChange: number) => {
+    setPoints((prevPoints) => {
+      const newPoints = Math.max(0, prevPoints + pointChange);
+      
+      if (newPoints >= goal && !showCelebration) {
+        setShowCelebration(true);
+        return 0;
+      }
+
+      return newPoints;
+    });
+  }
+
+  const savePointsToAccount = () => {
+    saveBalance(10)
+    saveXP(10)
   }
 
   const archiveTask = (taskId: string) => {
     const taskToArchive = tasks.find(t => t.id === taskId);
+    
     if (!taskToArchive) return;
 
-    const pointChange = 10;
+    savePointsToAccount()
 
     setTasks((prev) => prev.map((task) => {
       if (task.id === taskId) {
@@ -93,20 +116,7 @@ export const useTasks = () => {
         };
       }
       return task;
-    }));
-    updatePoints(pointChange)
-  }
-
-  const updatePoints = (pointChange: number) => {
-    setPoints((prevPoints) => {
-      const newPoints = Math.max(0, prevPoints + pointChange);
-
-      if (newPoints >= goal && !showCelebration) {
-        setShowCelebration(true);
-      }
-
-      return newPoints;
-    });
+    }))
   }
 
   const purchaseItem = (item: Reward) => {
@@ -150,7 +160,7 @@ export const useTasks = () => {
       if (user)
         try {
           await taskRepository.storeTasks(tasks)
-          await taskRepository.storePurchase(purchase, user?.uid)
+          //await taskRepository.storePurchase(purchase, user?.uid)
         } catch (err) {
           console.error("Bakgrundssparande misslyckades:", err)
         }
@@ -158,6 +168,11 @@ export const useTasks = () => {
 
     storeData()
   }, [tasks, purchase, isLoading])
+
+  useEffect(() => {
+    savePoints(points)
+    
+  }, [points])
 
   return {
     tasks,
