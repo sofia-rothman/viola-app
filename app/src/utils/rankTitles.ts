@@ -1,3 +1,4 @@
+/** Level titles ordered by experience level for the header progression label. */
 export const RANK_TITLES: string[] = [
   "Dammråtte-tämjare",
   "Pryl-pionjär",
@@ -23,4 +24,3 @@ export const RANK_TITLES: string[] = [
   "Intergalaktisk Ordningsexpert",
   "Odödlig Fixar-legend 🏆",
 ]
-

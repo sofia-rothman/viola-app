@@ -9,24 +9,25 @@ import TaskPage from "./pages/TaskPage/TaskPage"
 //import DashboardPage from "./pages/DashboardPage"
 import useAccountContext from "./context/AccountContext"
 
+/** Composes authenticated app chrome and feature routes. */
 function App() {
-  const {showCelebration} = useTaskContext()
-  const {account, loading} = useAccountContext()
+  const { showCelebration } = useTaskContext()
+  const { account, loading } = useAccountContext()
 
-  if (loading) return <div className="loader">Hämtar profil...</div>;
-  
+  if (loading) return <div className="loader">Hämtar profil...</div>
+
   return (
     <>
       <div className="app-wrapper">
-        {showCelebration && <CelebrationModal/>}
+        {showCelebration && <CelebrationModal />}
         <Header />
-        {account &&
+        {account && (
           <Routes>
-          {/*  <Route path="/" element={<DashboardPage />} /> */}
+            {/*  <Route path="/" element={<DashboardPage />} /> */}
             <Route path="/" element={<TaskPage />} />
             <Route path="/shop" element={<ShopPage />} />
-          </Routes> 
-        }
+          </Routes>
+        )}
       </div>
 
       <Navbar />

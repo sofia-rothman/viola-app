@@ -1,5 +1,3 @@
-/* import WalletIcon from "../../../../../app/src/assets/wallet.svg?react"
-import StarIcon from "../../../../app/src/assets/star.svg?react" */
 import "./StatCard.css"
 
 interface StatCardProps {
@@ -8,6 +6,7 @@ interface StatCardProps {
   value: string
 }
 
+/** Renders a compact labeled stat in the header. */
 const StatCard = (props: StatCardProps) => {
   const { icon, value, label } = props
 

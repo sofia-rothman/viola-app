@@ -6,10 +6,10 @@ interface AuthContextValue {
   loading: boolean
 }
 
-export const AuthContext = createContext<AuthContextValue | undefined>(
-  undefined
-)
+/** Context boundary for Firebase auth state. */
+export const AuthContext = createContext<AuthContextValue | undefined>(undefined)
 
+/** Returns auth state and ensures consumers stay inside the AuthProvider tree. */
 export default function useAuthContext() {
   const context = useContext(AuthContext)
 

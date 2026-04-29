@@ -1,11 +1,11 @@
 .shop-container {
   padding-top: 1rem;
-  padding-bottom: 150px; 
+  padding-bottom: 150px;
 }
 
 .shop-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); 
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
   padding: 20px;
 }
@@ -16,4 +16,3 @@
   align-items: center;
   justify-content: center;
 }
-

@@ -1,13 +1,10 @@
-// Import the functions you need from the SDKs you need
 import { getApp, getApps, initializeApp } from "firebase/app"
 import { getAuth, GoogleAuthProvider } from "firebase/auth"
 import { getFirestore } from "firebase/firestore"
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Keep Firebase config centralized so repositories and auth services share one app instance.
 const firebaseConfig = {
-  databaseURL:
-    "https://viola-task-manager-default-rtdb.europe-west1.firebasedatabase.app",
+  databaseURL: "https://viola-task-manager-default-rtdb.europe-west1.firebasedatabase.app",
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "viola-task-manager.firebaseapp.com",
   projectId: "viola-task-manager",
@@ -17,8 +14,13 @@ const firebaseConfig = {
   measurementId: "G-F4FKGSEW12",
 }
 
-// Initialize Firebase
 const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig)
+
+/** Firestore database shared by repositories. */
 export const db = getFirestore(app)
-export const auth = getAuth(app) // Exportera auth
-export const googleProvider = new GoogleAuthProvider() // Skapa en provider
+
+/** Firebase auth instance shared by hooks and services. */
+export const auth = getAuth(app)
+
+/** Google sign-in provider configured once for popup auth. */
+export const googleProvider = new GoogleAuthProvider()

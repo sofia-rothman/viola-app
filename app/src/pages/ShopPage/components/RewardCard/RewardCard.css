@@ -12,7 +12,7 @@
 }
 
 .shop-card:active {
-  transform: scale(0.95); 
+  transform: scale(0.95);
 }
 
 .shop-card .price-tag {
@@ -26,7 +26,7 @@
 }
 
 .product-emoji {
-  font-size: 3rem; 
+  font-size: 3rem;
   margin-bottom: 10px;
 }
 
@@ -38,8 +38,8 @@
 }
 
 .price-tag {
-  background: #fff0f6; 
-  color: #f83a85;      
+  background: #fff0f6;
+  color: #f83a85;
   padding: 4px 12px;
   border-radius: 12px;
   font-weight: 800;
@@ -64,7 +64,7 @@
 }
 
 .buy-button.success {
-  background: #2ecc71; 
-  transform: scale(1.05); 
+  background: #2ecc71;
+  transform: scale(1.05);
   border-color: #27ae60;
 }

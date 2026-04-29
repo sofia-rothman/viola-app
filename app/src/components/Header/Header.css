@@ -1,5 +1,5 @@
 .header {
-  background: linear-gradient(135deg, #F43E6A 0%, #A44163 100%);
+  background: linear-gradient(135deg, #f43e6a 0%, #a44163 100%);
   min-height: 30vh;
   border-radius: 0 0 50px 50px;
   padding: 1.5rem;
@@ -24,7 +24,7 @@
 .name svg {
   height: 3rem;
   width: 3rem;
-  fill:#ffcc00;
+  fill: #ffcc00;
   margin-bottom: -8px;
 }
 
@@ -41,5 +41,4 @@
   grid-template-columns: 1fr 1fr;
   gap: 1em;
   justify-content: flex-start;
-
 }

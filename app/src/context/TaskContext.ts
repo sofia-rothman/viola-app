@@ -21,12 +21,12 @@ interface TaskContextValue {
   setShowCelebration: (show: boolean) => void
 }
 
-export const TaskContext = createContext<TaskContextValue | undefined>(
-  undefined
-)
+/** Context boundary for task, progress, and purchase state. */
+export const TaskContext = createContext<TaskContextValue | undefined>(undefined)
 
+/** Returns task and shop state while enforcing that consumers are inside TaskProvider. */
 export default function useTaskContext() {
-  const tasks = useContext(TaskContext) 
+  const tasks = useContext(TaskContext)
 
   if (tasks === undefined) {
     throw new Error("useTaskContext must be used with TaskContext")

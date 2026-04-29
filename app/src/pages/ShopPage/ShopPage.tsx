@@ -6,12 +6,14 @@ import PurchaseRow from "./components/PurchaseRow/PurchaseRow"
 import RewardCard from "./components/RewardCard/RewardCard"
 import useAccountContext from "../../context/AccountContext"
 
+/** Displays purchasable rewards and purchase history for the active account. */
 const ShopPage = () => {
   const { account } = useAccountContext()
   const taskContext = useTaskContext()
   const [displayBalance, setDisplayBalance] = useState(account?.balance || 0)
 
   useEffect(() => {
+    // Count toward the saved balance to make balance changes feel earned rather than abrupt.
     const timer = setInterval(() => {
       setDisplayBalance((prev) => {
         const target = account?.balance || 0
@@ -28,23 +30,23 @@ const ShopPage = () => {
     return () => clearInterval(timer)
   }, [account?.balance])
 
-  
-    if(account) return (
-    <div className="shop-container">
-      Du har {displayBalance} ⭐️ att handla för
-      <div className="shop-grid">
-        {rewards.map((item) => (
-          <RewardCard key={item.id} item={item} />
-        ))}
+  if (account)
+    return (
+      <div className="shop-container">
+        Du har {displayBalance} ⭐️ att handla för
+        <div className="shop-grid">
+          {rewards.map((item) => (
+            <RewardCard key={item.id} item={item} />
+          ))}
+        </div>
+        <div>Min köphistorik</div>
+        <div className="my-rewards-list">
+          {taskContext.purchase?.map((item) => (
+            <PurchaseRow key={item.instanceId} item={item} />
+          ))}
+        </div>
       </div>
-      <div>Min köphistorik</div>
-      <div className="my-rewards-list">
-        {taskContext.purchase?.map((item) => (
-          <PurchaseRow key={item.instanceId} item={item} />
-        ))}
-      </div>
-    </div>
-  )
+    )
 }
 
 export default ShopPage
