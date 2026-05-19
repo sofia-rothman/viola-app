@@ -63,6 +63,10 @@ export default class FirebaseRepository implements IRepository {
           ...data,
           id: docSnap.id,
           dueDate: data.dueDate instanceof Timestamp ? data.dueDate.toDate() : data.dueDate,
+          completedAt:
+            data.completedAt instanceof Timestamp ? data.completedAt.toDate() : data.completedAt,
+          approvedAt:
+            data.approvedAt instanceof Timestamp ? data.approvedAt.toDate() : data.approvedAt,
         } as Task
       })
     } catch (error) {
@@ -87,33 +91,85 @@ export default class FirebaseRepository implements IRepository {
     }
   }
 
-  /** Not implemented because balance is currently stored on the user account document. */
-  fetchBalance(_userId: string): Promise<number | null> {
-    throw new Error("Method not implemented.")
+  /** Fetches the balance field from the user's account document. */
+  async fetchBalance(userId: string): Promise<number | null> {
+    try {
+      const account = await this.fetchUser(userId)
+      return account?.balance ?? null
+    } catch (error) {
+      console.error("Fel vid fetchBalance:", error)
+      return null
+    }
   }
 
-  /** Not implemented because balance is currently stored on the user account document. */
-  async storeBalance(_balance: number, _userId: string): Promise<void> {
-    throw new Error("Method not implemented.")
+  /** Updates the balance field on the user's account document. */
+  async storeBalance(balance: number, userId: string): Promise<void> {
+    const userRef = doc(db, "users", userId)
+    try {
+      await setDoc(userRef, { balance }, { merge: true })
+    } catch (error) {
+      console.error("Fel vid storeBalance:", error)
+    }
   }
 
-  /** Not implemented because XP is currently stored on the user account document. */
-  fetchXPpoints(_userId: string): Promise<number | null> {
-    throw new Error("Method not implemented.")
+  /** Fetches the experience field from the user's account document. */
+  async fetchXPpoints(userId: string): Promise<number | null> {
+    try {
+      const account = await this.fetchUser(userId)
+      return account?.experience ?? null
+    } catch (error) {
+      console.error("Fel vid fetchXPpoints:", error)
+      return null
+    }
   }
 
-  /** Not implemented because XP is currently stored on the user account document. */
-  async storeXPpoints(_experiencePoints: number, _userId: string): Promise<void> {
-    throw new Error("Method not implemented.")
+  /** Updates the experience field on the user's account document. */
+  async storeXPpoints(experiencePoints: number, userId: string): Promise<void> {
+    const userRef = doc(db, "users", userId)
+    try {
+      await setDoc(userRef, { experience: experiencePoints }, { merge: true })
+    } catch (error) {
+      console.error("Fel vid storeXPpoints:", error)
+    }
   }
 
-  /** Not implemented because purchase history has not been wired to Firestore yet. */
-  fetchPurchase(_userId: string): Promise<Purchase[] | null> {
-    throw new Error("Method not implemented.")
+  /** Fetches all purchases from the user's purchases subcollection. */
+  async fetchPurchase(userId: string): Promise<Purchase[] | null> {
+    const purchasesRef = collection(db, "users", userId, "purchases")
+
+    try {
+      const querySnapshot = await getDocs(purchasesRef)
+      return querySnapshot.docs.map((docSnap) => {
+        const data = docSnap.data()
+
+        // Convert Firestore Timestamp to Date for dateOfPurchase
+        return {
+          ...data,
+          dateOfPurchase:
+            data.dateOfPurchase instanceof Timestamp
+              ? data.dateOfPurchase.toDate()
+              : data.dateOfPurchase,
+        } as Purchase
+      })
+    } catch (error) {
+      console.error("Fel vid fetchPurchase:", error)
+      return []
+    }
   }
 
-  /** Not implemented because purchase history has not been wired to Firestore yet. */
-  async storePurchase(_purchase: Purchase[], _userId: string): Promise<void> {
-    throw new Error("Method not implemented.")
+  /** Stores all purchases to the user's purchases subcollection. */
+  async storePurchase(purchase: Purchase[], userId: string): Promise<void> {
+    const batch = writeBatch(db)
+
+    purchase.forEach((item) => {
+      const purchaseRef = doc(db, "users", userId, "purchases", item.instanceId)
+      batch.set(purchaseRef, item)
+    })
+
+    try {
+      await batch.commit()
+    } catch (error) {
+      console.error("Fel vid storePurchase:", error)
+    }
   }
 }

@@ -132,15 +132,28 @@ export const useTasks = () => {
 
     if (!taskToArchive) return
 
-    savePointsToAccount()
+    // Only credit points and set approvedAt for tasks that are currently completed
+    const isCompleted = taskToArchive.status === "completed"
+
+    if (isCompleted) {
+      savePointsToAccount()
+    }
 
     setTasks((prev) =>
       prev.map((task) => {
         if (task.id === taskId) {
-          return {
-            ...task,
-            status: "archived",
-            approvedAt: new Date(),
+          if (isCompleted) {
+            return {
+              ...task,
+              status: "archived",
+              approvedAt: new Date(),
+            }
+          } else {
+            // For non-completed tasks, only update the status
+            return {
+              ...task,
+              status: "archived",
+            }
           }
         }
         return task
