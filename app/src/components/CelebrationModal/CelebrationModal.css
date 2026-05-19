@@ -15,7 +15,7 @@
   align-items: center;
   width: 50vw;
   height: 30vh;
-  background-color:  rgba(248, 58, 133, 0.5);;
+  background-color: rgba(248, 58, 133, 0.5);
   backdrop-filter: blur(20px);
   position: absolute;
   border-radius: 5%;
@@ -29,7 +29,14 @@
 }
 
 @keyframes pop {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.4); color: var(--color-accent); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.4);
+    color: var(--color-accent);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

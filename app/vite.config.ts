@@ -6,8 +6,9 @@ import svgr from "vite-plugin-svgr"
 export default defineConfig({
   plugins: [react(), svgr()],
   test: {
-    globals: true, // Gör att du slipper importera 'describe', 'test' etc i varje fil
-    environment: 'jsdom', // Simulerar en webbläsare för dina hooks
-    setupFiles: './src/test/setup.ts', // (Valfritt) för extra matchers
+    globals: true,
+    // Hooks and components need browser-like APIs while running in Vitest.
+    environment: "jsdom",
+    setupFiles: "./src/test/setup.ts",
   },
 })

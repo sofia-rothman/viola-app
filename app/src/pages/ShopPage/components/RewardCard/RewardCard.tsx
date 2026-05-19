@@ -9,6 +9,7 @@ interface RewardCardProps {
   item: Reward
 }
 
+/** Renders a reward and handles either purchase feedback or redirecting back to tasks. */
 const RewardCard = (props: RewardCardProps) => {
   const { item } = props
   const taskContext = useTaskContext()
@@ -37,9 +38,9 @@ const RewardCard = (props: RewardCardProps) => {
       <div className="product-name">{item.title}</div>
       <div className="price-tag">Pris: {item.price} ⭐️</div>
       <button
-        className={`buy-button ${!canAfford && "disabled"} ${
-          isPurchased && "success"
-        }`}
+        className={["buy-button", !canAfford ? "disabled" : "", isPurchased ? "success" : ""]
+          .filter(Boolean)
+          .join(" ")}
         onClick={handleClick}
       >
         {isPurchased ? "Köpt! ✅" : canAfford ? "KÖP" : "Samla fler stjärnor"}

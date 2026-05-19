@@ -1,12 +1,13 @@
 import { StrictMode } from "react"
 import { createRoot } from "react-dom/client"
 import "./index.css"
-import App from "./App.tsx"
+import App from "./App"
 import { BrowserRouter } from "react-router-dom"
-import { TaskProvider } from "./context/TaskProvider.tsx"
-import { AccountProvider } from "./context/AccountProvider.tsx"
-import { AuthProvider } from "./context/AuthProvider.tsx"
+import { TaskProvider } from "./context/TaskProvider"
+import { AccountProvider } from "./context/AccountProvider"
+import { AuthProvider } from "./context/AuthProvider"
 
+// Providers are nested by dependency: auth resolves first, then account, then task data.
 createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
     <StrictMode>
@@ -18,5 +19,5 @@ createRoot(document.getElementById("root")!).render(
         </AccountProvider>
       </AuthProvider>
     </StrictMode>
-  </BrowserRouter>
+  </BrowserRouter>,
 )

@@ -1,68 +1,71 @@
-import { useState, useEffect } from "react";
-import { createAccount, type Account } from "../types/Account";
+import { useState, useEffect } from "react"
+import { createAccount, type Account } from "../types/Account"
 import { taskRepository } from "../repository"
-import type { User } from "firebase/auth";
+import type { User } from "firebase/auth"
 
-interface useAccountProps {
-	user: User | null
-	isLoadingAuth: boolean
+interface UseAccountProps {
+  user: User | null
+  isLoadingAuth: boolean
 }
 
-export const useAccount = (props: useAccountProps) => {
-	const { user, isLoadingAuth } = props	
-	const [account, setAccount] = useState<Account | null>(null)
-	const [loading, setLoading] = useState(false)
+/**
+ * Loads the signed-in user's account and exposes small mutations for progress and balance.
+ *
+ * Account writes are centralized here so providers and UI components do not need repository details.
+ */
+export const useAccount = (props: UseAccountProps) => {
+  const { user, isLoadingAuth } = props
+  const [account, setAccount] = useState<Account | null>(null)
+  const [loading, setLoading] = useState(false)
 
-	const saveAccount = () => {
-		user?.uid &&
-		setAccount(createAccount(user?.uid))
-	}
+  const saveAccount = () => {
+    user?.uid && setAccount(createAccount(user?.uid))
+  }
 
-	const savePoints = (points: number) => {
-		console.log("savePoints", points)
-		if(!account) return
-		setAccount(prev => ({ ...prev!, points: points }))
-	}
+  const savePoints = (points: number) => {
+    if (!account) return
+    setAccount((prev) => ({ ...prev!, points: points }))
+  }
 
-	const saveBalance = (balance: number) => {
-		if(!account) return
-		setAccount(prev => ({ ...prev!, balance: prev!.balance + balance }))
-	}
+  const saveBalance = (balance: number) => {
+    if (!account) return
+    setAccount((prev) => ({ ...prev!, balance: prev!.balance + balance }))
+  }
 
-	const saveXP = (XP: number) => {
-		if(!account) return
-		setAccount(prev => ({ ...prev!, experience: prev!.experience + XP }))
-	}
+  const saveXP = (experiencePoints: number) => {
+    if (!account) return
+    setAccount((prev) => ({ ...prev!, experience: prev!.experience + experiencePoints }))
+  }
 
-	useEffect(() => {
-		if (user && !isLoadingAuth && account == null) {
-			setLoading(true)
+  useEffect(() => {
+    if (user && !isLoadingAuth && account == null) {
+      setLoading(true)
 
-			const getAccountFromDatabase = async () => {
-				try {
-					const account = await taskRepository.fetchUser(user.uid)
+      const getAccountFromDatabase = async () => {
+        try {
+          const savedAccount = await taskRepository.fetchUser(user.uid)
 
-					if(account) {
-						setAccount(account)
-					} else {
-						const newAccount = createAccount(user.uid)
-						await taskRepository.storeUser(newAccount, user.uid)
-						setAccount(newAccount)
-					}
-
-				} catch (err) {
+          if (savedAccount) {
+            setAccount(savedAccount)
+          } else {
+            const newAccount = createAccount(user.uid)
+            await taskRepository.storeUser(newAccount, user.uid)
+            setAccount(newAccount)
+          }
+        } catch (err) {
           console.error("Hämtning misslyckades:", err)
         } finally {
           setLoading(false)
         }
-			}
-			getAccountFromDatabase()
-		}
-	}, [user?.uid])
+      }
+      getAccountFromDatabase()
+    }
+  }, [user?.uid])
 
-	useEffect(() => {
+  useEffect(() => {
     if (loading || isLoadingAuth || account == null || user == null) return
 
+    // Persist account changes after loading finishes to avoid replacing remote data on startup.
     const storeData = async () => {
       try {
         await taskRepository.storeUser(account, user?.uid)
@@ -74,5 +77,5 @@ export const useAccount = (props: useAccountProps) => {
     storeData()
   }, [account, loading])
 
-	return { account, saveAccount, savePoints, saveBalance, saveXP, loading }
+  return { account, saveAccount, savePoints, saveBalance, saveXP, loading }
 }

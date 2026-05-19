@@ -3,19 +3,23 @@ import TaskIcon from "../../assets/task-list.svg?react"
 import ShopIcon from "../../assets/shopping-bag.svg?react"
 import "./Navbar.css"
 
+/** Primary navigation between tasks and the reward shop. */
 const Navbar = () => {
   return (
     <div className="navbar">
-      <NavLink to={"/"} className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}>
+      <NavLink to={"/"} className={({ isActive }) => (isActive ? "nav-item active" : "nav-item")}>
         <div className="task-icon">
           <TaskIcon />
         </div>
         Uppgifter
       </NavLink>
 
-      <NavLink to={"/shop"} className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}>
+      <NavLink
+        to={"/shop"}
+        className={({ isActive }) => (isActive ? "nav-item active" : "nav-item")}
+      >
         <div className="shop-icon">
-         <ShopIcon />
+          <ShopIcon />
         </div>
         Butik
       </NavLink>

@@ -2,6 +2,7 @@ import { useState } from "react"
 import "./TaskInput.css"
 import useTaskContext from "../../../../context/TaskContext"
 
+/** Collects a task title and submits it to task state. */
 const TaskInput = () => {
   const tasks = useTaskContext()
   const [title, setTitle] = useState("")
@@ -21,11 +22,7 @@ const TaskInput = () => {
         placeholder="Vad vill du fixa idag?"
       ></input>
       <div className="button-wrapper">
-        <button
-          className="add-button"
-          type="submit"
-          onClick={() => handleClick()}
-        >
+        <button className="add-button" type="submit" onClick={() => handleClick()}>
           Lägg till +
         </button>
       </div>

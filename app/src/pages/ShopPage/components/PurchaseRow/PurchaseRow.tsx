@@ -5,6 +5,7 @@ interface PurchaseRowProps {
   item: Purchase
 }
 
+/** Shows a purchased reward with its purchase date. */
 const PurchaseRow = (props: PurchaseRowProps) => {
   const { item } = props
   const dateFormatted = item.dateOfPurchase?.toLocaleDateString()

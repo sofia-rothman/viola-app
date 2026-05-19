@@ -3,14 +3,16 @@ import "./CelebrationModal.css"
 import { useEffect } from "react"
 import useTaskContext from "../../context/TaskContext"
 
+/** Celebrates a completed goal and lets the user dismiss the overlay. */
 const CelebrationModal = () => {
-  const {setShowCelebration} = useTaskContext()
+  const { setShowCelebration } = useTaskContext()
 
   const handleClick = () => {
     setShowCelebration(false)
   }
 
   useEffect(() => {
+    // Confetti runs once when the modal appears so closing it does not replay the effect.
     confetti({
       particleCount: 500,
       spread: 100,
@@ -25,10 +27,7 @@ const CelebrationModal = () => {
       <div className="modal">
         <h3>⭐️ Mål uppnått ⭐️</h3>
         <h2>Bra Jobbat!</h2>
-        <h3>
-          Du har nått dina mål för dagen. Fortsätt så här för att hålla sviten
-          vid liv!
-        </h3>
+        <h3>Du har nått dina mål för dagen. Fortsätt så här för att hålla sviten vid liv!</h3>
         <button className="close-button" onClick={() => handleClick()}>
           Stäng
         </button>

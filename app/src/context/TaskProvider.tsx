@@ -5,6 +5,7 @@ interface TaskProviderProps {
   children: React.ReactNode
 }
 
+/** Provides task, progress, and shop state to feature pages. */
 export const TaskProvider = (props: TaskProviderProps) => {
   const { children } = props
   const {
@@ -26,21 +27,21 @@ export const TaskProvider = (props: TaskProviderProps) => {
   } = useTasks()
 
   const values = {
-    tasks: tasks,
-    addTask: addTask,
-    toggleStatus: toggleStatus,
-    deleteTask: deleteTask,
-    archiveTask: archiveTask,
-    points: points,
-    clearTasks: clearTasks,
-    title: title || 'Titel', 
-    level: level,
-    goal: goal,
-    purchaseItem: purchaseItem,
-    purchase: purchase,
-    isLoading: isLoading,
-    showCelebration: showCelebration, 
-    setShowCelebration: setShowCelebration,
+    tasks,
+    addTask,
+    toggleStatus,
+    deleteTask,
+    archiveTask,
+    points,
+    clearTasks,
+    title: title || "Titel",
+    level,
+    goal,
+    purchaseItem,
+    purchase,
+    isLoading,
+    showCelebration,
+    setShowCelebration,
   }
 
   return <TaskContext.Provider value={values}>{children}</TaskContext.Provider>

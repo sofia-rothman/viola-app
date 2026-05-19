@@ -1,3 +1,4 @@
+/** Static reward catalog shown in the shop. */
 export const rewards = [
   {
     id: "1",
